@@ -14,7 +14,8 @@ license = {text = "MIT license"}
 requires-python = ">=3.10"
 classifiers = []
 dependencies = [
-
+    "pillow>=10.0.0",
+    "numpy>=1.24.0",
 ]
 
 

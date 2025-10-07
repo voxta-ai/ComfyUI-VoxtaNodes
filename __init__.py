@@ -1,16 +1,11 @@
-"""Top-level package for voxta."""
+from .src.voxta.voxta_export_character import VoxtaExportCharacter
 
-__all__ = [
-    "NODE_CLASS_MAPPINGS",
-    "NODE_DISPLAY_NAME_MAPPINGS",
-    
-]
+NODE_CLASS_MAPPINGS = {
+    "VoxtaExportCharacter": VoxtaExportCharacter,
+}
 
-__author__ = """Team Voxta"""
-__email__ = "info@voxta.ai"
-__version__ = "0.0.1"
+NODE_DISPLAY_NAME_MAPPINGS = {
+    "VoxtaExportCharacter": "Voxta: Export Character",
+}
 
-from .src.voxta.nodes import NODE_CLASS_MAPPINGS
-from .src.voxta.nodes import NODE_DISPLAY_NAME_MAPPINGS
-
-
+__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "VoxtaExportCharacter"]

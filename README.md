@@ -38,7 +38,7 @@ git push
 
 ## Writing custom nodes
 
-An example custom node is located in [node.py](src/voxta/nodes.py). To learn more, read the [docs](https://docs.comfy.org/essentials/custom_node_overview).
+An example custom node is located in [node.py](src/voxta/voxta_export_character.py). To learn more, read the [docs](https://docs.comfy.org/essentials/custom_node_overview).
 
 
 ## Tests
