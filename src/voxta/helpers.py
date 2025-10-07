@@ -22,7 +22,7 @@ class IdFilenameBuilder:
         if sub in {".", ".."}:
             sub = ""
         sub = sub.replace(".", "")
-        return sub or "renamed"
+        return sub or ""
 
     @staticmethod
     def sanitize_full_path(path: str) -> str:
