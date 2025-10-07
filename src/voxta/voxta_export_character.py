@@ -37,10 +37,10 @@ class VoxtaExportCharacter:
                 "combination_ids": ("PROMPTCOMBINATORIDS",),
             },
             "optional": {
-                "voxta_data_path": ("STRING", {"default": "", "multiline": False}),
-                "user_id": ("STRING", {"default": "", "multiline": False}),
-                "character_id": ("STRING", {"default": "", "multiline": False}),
-                "avatar_subfolder": ("STRING", {"default": "", "multiline": False}),
+                # Single unified output path. If empty, falls back to ComfyUI output directory.
+                "output_path": ("STRING", {"default": "", "multiline": False}),
+                # Optional subfolder under the chosen root.
+                "subfolder": ("STRING", {"default": "Avatars/Default", "multiline": False}),
             },
         }
 
@@ -68,32 +68,19 @@ class VoxtaExportCharacter:
             return default
         return str(value)
 
-    @staticmethod
-    def _sanitize_component(comp: str) -> str:
-        if not comp:
-            return ""
-        cleaned = IdFilenameBuilder.sanitize_subfolder(comp)
-        if cleaned == "renamed":
-            return ""
-        return cleaned
-
     def copy_and_rename(
         self,
         output_format=None,
         images=None,
         prompts=None,
         combination_ids=None,
-        voxta_data_path=None,
-        user_id=None,
-        character_id=None,
-        avatar_subfolder=None,
+        output_path=None,
+        subfolder=None,
     ):
         logger.debug(
-            "copy_and_rename(raw): voxta_data_path=%r user_id=%r character_id=%r avatar_subfolder=%r output_format=%r images=%s prompts=%s combination_ids=%s",
-            voxta_data_path,
-            user_id,
-            character_id,
-            avatar_subfolder,
+            "copy_and_rename(raw): output_path=%r subfolder=%r output_format=%r images=%s prompts=%s combination_ids=%s",
+            output_path,
+            subfolder,
             output_format,
             len(images) if images is not None else None,
             len(prompts) if prompts is not None else None,
@@ -101,37 +88,25 @@ class VoxtaExportCharacter:
         )
 
         output_format = self._coerce_scalar_str(output_format, ".webp lossy 90")
-        voxta_data_path = self._coerce_scalar_str(voxta_data_path, "")
-        user_id = self._coerce_scalar_str(user_id, "")
-        character_id = self._coerce_scalar_str(character_id, "")
-        avatar_subfolder = self._coerce_scalar_str(avatar_subfolder, "")
+        output_path = self._coerce_scalar_str(output_path, "")
+        subfolder = self._coerce_scalar_str(subfolder, "")
 
         ImageExporter.require_modules()  # pragma: no cover
 
-        use_voxta_layout = all(v.strip() for v in [voxta_data_path, user_id, character_id])
-        if use_voxta_layout:
-            base = IdFilenameBuilder.sanitize_full_path(voxta_data_path)
-            uid = self._sanitize_component(user_id)
-            cid = self._sanitize_component(character_id)
-            if base and uid and cid:
-                root = os.path.join(base, "Users", uid, "Characters", cid, "Assets", "Avatars")
-                mode = "voxta"
-            else:
-                root = folder_paths.get_output_directory()
-                mode = "fallback_sanitized"
+        if output_path.strip():
+            root = IdFilenameBuilder.sanitize_full_path(output_path)
+            mode = "custom"
         else:
             root = folder_paths.get_output_directory()
-            mode = "fallback_default"
+            mode = "default"
 
-        avatar_subfolder = IdFilenameBuilder.sanitize_subfolder(avatar_subfolder)
-        if avatar_subfolder == "renamed":
-            avatar_subfolder = ""
+        subfolder = IdFilenameBuilder.sanitize_subfolder(subfolder)
 
         os.makedirs(root, exist_ok=True)
-        save_dir = os.path.join(root, avatar_subfolder) if avatar_subfolder else root
+        save_dir = os.path.join(root, subfolder) if subfolder else root
         os.makedirs(save_dir, exist_ok=True)
 
-        logger.debug("export root (%s): %s subfolder=%s", mode, root, avatar_subfolder or "<none>")
+        logger.debug("export root (%s): %s subfolder=%s", mode, root, subfolder or "<none>")
 
         fmt = ImageExporter.determine_format(output_format)
         ext = fmt["ext"]
@@ -168,7 +143,7 @@ class VoxtaExportCharacter:
             results.append(
                 {
                     "filename": final_name,
-                    "subfolder": avatar_subfolder if avatar_subfolder else os.path.basename(save_dir),
+                    "subfolder": subfolder if subfolder else os.path.basename(save_dir),
                     "type": self.type,
                     "mode": mode,
                 }

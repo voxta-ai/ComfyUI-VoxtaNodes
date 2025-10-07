@@ -14,29 +14,27 @@ def test_signature_and_meta():
     assert VoxtaExportCharacter.CATEGORY == "Voxta"
 
 
-def test_voxta_layout_with_subfolder(tmp_path):
+def test_with_custom_output_path_and_subfolder(tmp_path):
     node = VoxtaExportCharacter()
     images = [make_rgba(), make_rgba(a=0.5)]
     prompts = ["p1", "p2"]
     combination_ids = [["Neutral", "Idle"], ["Neutral", "Idle"]]
 
-    voxta_root = tmp_path / "voxta_data"
+    custom_root = tmp_path / "custom_output"
 
     result = node.copy_and_rename(
         output_format=".webp lossy 80",
         images=images,
         prompts=prompts,
         combination_ids=combination_ids,
-        voxta_data_path=str(voxta_root),
-        user_id="userX",
-        character_id="charY",
-        avatar_subfolder="my*sub:folder",
+        output_path=str(custom_root),
+        subfolder="my*sub:folder",
     )
 
     filenames = result["ui"]["filenames"]
     assert filenames == ["Neutral_Idle_01.webp", "Neutral_Idle_02.webp"], filenames
 
-    expected_dir = voxta_root / "Users" / "userX" / "Characters" / "charY" / "Assets" / "Avatars" / "my_sub_folder"
+    expected_dir = custom_root / "my_sub_folder"
     for f in filenames:
         assert (expected_dir / f).exists()
 
@@ -52,7 +50,7 @@ def test_fallback_default_root(chdir_tmp):
         images=images,
         prompts=prompts,
         combination_ids=combination_ids,
-        # Missing voxta fields to trigger fallback
+        # No output_path provided -> fallback
     )
 
     filenames = result["ui"]["filenames"]
