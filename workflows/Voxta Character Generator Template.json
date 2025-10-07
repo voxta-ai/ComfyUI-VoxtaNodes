@@ -1,8 +1,8 @@
 {
     "id": "00dab147-56a7-4cf6-b1c1-2a377a578162",
     "revision": 0,
-    "last_node_id": 71,
-    "last_link_id": 183,
+    "last_node_id": 77,
+    "last_link_id": 195,
     "nodes": [
         {
             "id": 61,
@@ -499,7 +499,7 @@
                 512,
                 true,
                 1024,
-                863492544830539,
+                184823431891104,
                 "randomize",
                 32,
                 6,
@@ -807,10 +807,10 @@
                 "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-                1027697832677517,
+                562860212095383,
                 "randomize",
                 32,
-                6,
+                8,
                 "euler_ancestral",
                 "karras",
                 1
@@ -1004,7 +1004,7 @@
                     "type": "IMAGE",
                     "links": [
                         107,
-                        176
+                        193
                     ]
                 }
             ],
@@ -1128,70 +1128,6 @@
             },
             "widgets_values": [
                 "pony\\ponyDiffusionV6XL_v6StartWithThisOne.safetensors"
-            ]
-        },
-        {
-            "id": 53,
-            "type": "TriggerWord Toggle (LoraManager)",
-            "pos": [
-                -1990,
-                90
-            ],
-            "size": [
-                400,
-                280
-            ],
-            "flags": {
-                "pinned": true
-            },
-            "order": 13,
-            "mode": 0,
-            "inputs": [
-                {
-                    "localized_name": "group_mode",
-                    "name": "group_mode",
-                    "type": "BOOLEAN",
-                    "widget": {
-                        "name": "group_mode"
-                    },
-                    "link": null
-                },
-                {
-                    "localized_name": "default_active",
-                    "name": "default_active",
-                    "type": "BOOLEAN",
-                    "widget": {
-                        "name": "default_active"
-                    },
-                    "link": null
-                },
-                {
-                    "name": "trigger_words",
-                    "shape": 7,
-                    "type": "string",
-                    "link": 138
-                }
-            ],
-            "outputs": [
-                {
-                    "localized_name": "filtered_trigger_words",
-                    "name": "filtered_trigger_words",
-                    "type": "STRING",
-                    "links": [
-                        178
-                    ]
-                }
-            ],
-            "properties": {
-                "cnr_id": "comfyui-lora-manager",
-                "ver": "0.9.5",
-                "Node name for S&R": "TriggerWord Toggle (LoraManager)"
-            },
-            "widgets_values": [
-                true,
-                true,
-                [],
-                ""
             ]
         },
         {
@@ -1326,8 +1262,8 @@
                     "shape": 6,
                     "type": "STRING",
                     "links": [
-                        167,
-                        175
+                        175,
+                        194
                     ]
                 },
                 {
@@ -1336,7 +1272,7 @@
                     "shape": 6,
                     "type": "PROMPTCOMBINATORIDS",
                     "links": [
-                        168
+                        195
                     ]
                 },
                 {
@@ -1421,6 +1357,89 @@
             ]
         },
         {
+            "id": 29,
+            "type": "PreviewImage",
+            "pos": [
+                -40,
+                -310
+            ],
+            "size": [
+                500,
+                680
+            ],
+            "flags": {
+                "collapsed": false,
+                "pinned": true
+            },
+            "order": 24,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "images",
+                    "name": "images",
+                    "type": "IMAGE",
+                    "link": 107
+                }
+            ],
+            "outputs": [],
+            "title": "Final",
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.26",
+                "Node name for S&R": "PreviewImage"
+            },
+            "widgets_values": [],
+            "color": "#222",
+            "bgcolor": "#000"
+        },
+        {
+            "id": 70,
+            "type": "JjkText",
+            "pos": [
+                -1550,
+                -80
+            ],
+            "size": [
+                370,
+                150
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 5,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "text"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "links": [
+                        183
+                    ]
+                }
+            ],
+            "title": "Model Shared Suffix",
+            "properties": {
+                "cnr_id": "jjk",
+                "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
+                "Node name for S&R": "JjkText"
+            },
+            "widgets_values": [
+                ""
+            ]
+        },
+        {
             "id": 69,
             "type": "JjkText",
             "pos": [
@@ -1434,7 +1453,7 @@
             "flags": {
                 "pinned": true
             },
-            "order": 5,
+            "order": 6,
             "mode": 0,
             "inputs": [
                 {
@@ -1468,49 +1487,66 @@
             ]
         },
         {
-            "id": 70,
-            "type": "JjkText",
+            "id": 53,
+            "type": "TriggerWord Toggle (LoraManager)",
             "pos": [
-                -1550,
-                -80
+                -1990,
+                90
             ],
             "size": [
-                370,
-                150
+                400,
+                280
             ],
             "flags": {
                 "pinned": true
             },
-            "order": 6,
+            "order": 13,
             "mode": 0,
             "inputs": [
                 {
-                    "localized_name": "text",
-                    "name": "text",
-                    "type": "STRING",
+                    "localized_name": "group_mode",
+                    "name": "group_mode",
+                    "type": "BOOLEAN",
                     "widget": {
-                        "name": "text"
+                        "name": "group_mode"
                     },
                     "link": null
+                },
+                {
+                    "localized_name": "default_active",
+                    "name": "default_active",
+                    "type": "BOOLEAN",
+                    "widget": {
+                        "name": "default_active"
+                    },
+                    "link": null
+                },
+                {
+                    "name": "trigger_words",
+                    "shape": 7,
+                    "type": "string",
+                    "link": 138
                 }
             ],
             "outputs": [
                 {
-                    "localized_name": "text",
-                    "name": "text",
+                    "localized_name": "filtered_trigger_words",
+                    "name": "filtered_trigger_words",
                     "type": "STRING",
                     "links": [
-                        183
+                        178
                     ]
                 }
             ],
-            "title": "Model Shared Suffix",
             "properties": {
-                "cnr_id": "jjk",
-                "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
-                "Node name for S&R": "JjkText"
+                "cnr_id": "comfyui-lora-manager",
+                "ver": "0.9.5",
+                "Node name for S&R": "TriggerWord Toggle (LoraManager)"
             },
             "widgets_values": [
+                true,
+                true,
+                [],
                 ""
             ]
         },
@@ -1605,126 +1641,15 @@
             ]
         },
         {
-            "id": 29,
-            "type": "PreviewImage",
-            "pos": [
-                -40,
-                -310
-            ],
-            "size": [
-                500,
-                680
-            ],
-            "flags": {
-                "collapsed": false,
-                "pinned": true
-            },
-            "order": 24,
-            "mode": 0,
-            "inputs": [
-                {
-                    "localized_name": "images",
-                    "name": "images",
-                    "type": "IMAGE",
-                    "link": 107
-                }
-            ],
-            "outputs": [],
-            "title": "Final",
-            "properties": {
-                "cnr_id": "comfy-core",
-                "ver": "0.3.26",
-                "Node name for S&R": "PreviewImage"
-            },
-            "widgets_values": [],
-            "color": "#222",
-            "bgcolor": "#000"
-        },
-        {
-            "id": 64,
-            "type": "PromptCombinatorExportGallery",
-            "pos": [
-                480,
-                -310
-            ],
-            "size": [
-                750,
-                680
-            ],
-            "flags": {
-                "pinned": true
-            },
-            "order": 25,
-            "mode": 0,
-            "inputs": [
-                {
-                    "localized_name": "images",
-                    "name": "images",
-                    "type": "IMAGE",
-                    "link": 176
-                },
-                {
-                    "localized_name": "prompts",
-                    "name": "prompts",
-                    "type": "STRING",
-                    "link": 167
-                },
-                {
-                    "localized_name": "combination_ids",
-                    "name": "combination_ids",
-                    "type": "PROMPTCOMBINATORIDS",
-                    "link": 168
-                },
-                {
-                    "localized_name": "filename_prefix",
-                    "name": "filename_prefix",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "filename_prefix"
-                    },
-                    "link": null
-                },
-                {
-                    "localized_name": "image_export_format",
-                    "name": "image_export_format",
-                    "type": "COMBO",
-                    "widget": {
-                        "name": "image_export_format"
-                    },
-                    "link": null
-                },
-                {
-                    "localized_name": "embed_all_images_in_html",
-                    "name": "embed_all_images_in_html",
-                    "type": "BOOLEAN",
-                    "widget": {
-                        "name": "embed_all_images_in_html"
-                    },
-                    "link": null
-                }
-            ],
-            "outputs": [],
-            "properties": {
-                "cnr_id": "comfyui-prompt-combinator",
-                "ver": "3576ace3f2776918c1046b6674fbe345a46dba2f",
-                "Node name for S&R": "PromptCombinatorExportGallery"
-            },
-            "widgets_values": [
-                "voxta",
-                ".webp lossy 80",
-                false
-            ]
-        },
-        {
-            "id": 66,
+            "id": 68,
             "type": "JjkText",
             "pos": [
                 -1160,
-                110
+                -300
             ],
             "size": [
                 600,
-                200
+                130
             ],
             "flags": {
                 "pinned": true
@@ -1748,18 +1673,122 @@
                     "name": "text",
                     "type": "STRING",
                     "links": [
-                        179
+                        181
                     ]
                 }
             ],
-            "title": "States",
+            "title": "Basic Prompt",
             "properties": {
                 "cnr_id": "jjk",
                 "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
                 "Node name for S&R": "JjkText"
             },
             "widgets_values": [
-                "Idle@looking at viewer, mouth closed\nThinking@thinking, finger on lips, looking away, tilted head\nTalking1@talking, (mouth open:0.6), looking at viewer, (gesturing:0.4), stare\nTalking2@explaining, talking, (mouth wide open:0.5), looking at viewer, (tilted head:0.3)\nTalking3@speaking, (open mouth:1.2), looking at viewer, talking, discussion"
+                "1girl (ilfutabalily, p5ann face:0.6), adult, black hair ponytails, light green iris, portrait front view from the shoulders up, simple black t-shirt with smiley logo, simple pure black background"
+            ]
+        },
+        {
+            "id": 77,
+            "type": "VoxtaExportCharacter",
+            "pos": [
+                480,
+                -310
+            ],
+            "size": [
+                750,
+                680
+            ],
+            "flags": {},
+            "order": 25,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "images",
+                    "name": "images",
+                    "type": "IMAGE",
+                    "link": 193
+                },
+                {
+                    "localized_name": "prompts",
+                    "name": "prompts",
+                    "type": "STRING",
+                    "link": 194
+                },
+                {
+                    "localized_name": "combination_ids",
+                    "name": "combination_ids",
+                    "type": "PROMPTCOMBINATORIDS",
+                    "link": 195
+                },
+                {
+                    "localized_name": "output_format",
+                    "name": "output_format",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "output_format"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "voxta_data_path",
+                    "name": "voxta_data_path",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "voxta_data_path"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "user_id",
+                    "name": "user_id",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "user_id"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "character_id",
+                    "name": "character_id",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "character_id"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "avatar_subfolder",
+                    "name": "avatar_subfolder",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "avatar_subfolder"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "IMAGE",
+                    "name": "IMAGE",
+                    "type": "IMAGE",
+                    "links": null
+                }
+            ],
+            "properties": {
+                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
+                "ver": "8df5b4c25019e2c3144bd805be70400809a2f25c",
+                "Node name for S&R": "VoxtaExportCharacter"
+            },
+            "widgets_values": [
+                ".webp lossy 90",
+                "C:\\Voxta\\Data",
+                "8a0e9879-f8c8-4c96-8b07-6b51e49987e2",
+                "1142067d-82a6-4cb1-06e2-6829063fb9d2",
+                "Default"
             ]
         },
         {
@@ -1807,6 +1836,53 @@
             },
             "widgets_values": [
                 "Neutral@simple smile\nLove@heart-shaped pupils, loving\nUnhappy@pouting, unhappy\nSmile@big smile, happy\nLaugh@laugh\nCry@sad, pouting\nFear@afraid, worried\nAngry@angry, anger mark\nHorny@horny, hearts, blushing\nQuestion@confused, question marks, raised eyebrow\nSurprise@surprised, exclamation mark"
+            ]
+        },
+        {
+            "id": 66,
+            "type": "JjkText",
+            "pos": [
+                -1160,
+                110
+            ],
+            "size": [
+                600,
+                200
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 9,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "text"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "links": [
+                        179
+                    ]
+                }
+            ],
+            "title": "States",
+            "properties": {
+                "cnr_id": "jjk",
+                "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
+                "Node name for S&R": "JjkText"
+            },
+            "widgets_values": [
+                "Idle@looking at viewer, mouth closed\nThinking@thinking, finger on lips, looking away, tilted head\nTalking1@talking, (mouth open:0.6), looking at viewer, (gesturing:0.4), stare\nTalking2@explaining, talking, (mouth wide open:0.5), looking at viewer, (tilted head:0.3)\nTalking3@speaking, (open mouth:1.2), looking at viewer, talking, discussion"
             ]
         },
         {
@@ -1860,54 +1936,7 @@
                 "Node name for S&R": "CLIPTextEncode"
             },
             "widgets_values": [
-                "anime, graphic, (text, words, speech:1.2), painting, crayon, graphite, abstract, glitch, deformed, mutated, ugly, disfigured, long body, lowres, bad anatomy, bad hands, missing fingers, extra digits, fewer digits, very displeasing, (worst quality, bad quality:1.2), bad anatomy, sketch, jpeg artifacts, signature, watermark, username, conjoined, bad ai-generated, (symmetric:1.1)"
-            ]
-        },
-        {
-            "id": 68,
-            "type": "JjkText",
-            "pos": [
-                -1160,
-                -300
-            ],
-            "size": [
-                600,
-                130
-            ],
-            "flags": {
-                "pinned": true
-            },
-            "order": 9,
-            "mode": 0,
-            "inputs": [
-                {
-                    "localized_name": "text",
-                    "name": "text",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "text"
-                    },
-                    "link": null
-                }
-            ],
-            "outputs": [
-                {
-                    "localized_name": "text",
-                    "name": "text",
-                    "type": "STRING",
-                    "links": [
-                        181
-                    ]
-                }
-            ],
-            "title": "Basic Prompt",
-            "properties": {
-                "cnr_id": "jjk",
-                "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
-                "Node name for S&R": "JjkText"
-            },
-            "widgets_values": [
-                "1girl, black hair ponytails, green eyes, portrait front view from the shoulders up, simple black t-shirt, simple background, black background"
+                "anime, graphic, (text, words, speech:1.2), (painting, crayon, graphite:0.9), deformed, mutated, (ugly:0.4), disfigured, long body, lowres, bad anatomy, bad hands, missing fingers, extra digits, fewer digits, very displeasing, (worst quality, bad quality:0.8), bad anatomy, sketch, jpeg artifacts, signature, watermark, username, conjoined, bad ai-generated"
             ]
         }
     ],
@@ -2121,36 +2150,12 @@
             "INT"
         ],
         [
-            167,
-            63,
-            0,
-            64,
-            1,
-            "STRING"
-        ],
-        [
-            168,
-            63,
-            1,
-            64,
-            2,
-            "PROMPTCOMBINATORIDS"
-        ],
-        [
             175,
             63,
             0,
             55,
             1,
             "STRING"
-        ],
-        [
-            176,
-            47,
-            0,
-            64,
-            0,
-            "IMAGE"
         ],
         [
             177,
@@ -2207,6 +2212,30 @@
             63,
             8,
             "STRING"
+        ],
+        [
+            193,
+            47,
+            0,
+            77,
+            0,
+            "IMAGE"
+        ],
+        [
+            194,
+            63,
+            0,
+            77,
+            1,
+            "STRING"
+        ],
+        [
+            195,
+            63,
+            1,
+            77,
+            2,
+            "PROMPTCOMBINATORIDS"
         ]
     ],
     "groups": [
@@ -2334,10 +2363,10 @@
     "config": {},
     "extra": {
         "ds": {
-            "scale": 1.1000000000000005,
+            "scale": 1,
             "offset": [
-                850.6368756031669,
-                318.2781635071796
+                2189.7859393231174,
+                369.9139272017555
             ]
         },
         "frontendVersion": "1.17.11",
