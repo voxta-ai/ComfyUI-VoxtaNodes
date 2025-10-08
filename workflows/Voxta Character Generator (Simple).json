@@ -1,0 +1,1988 @@
+{
+    "id": "00dab147-56a7-4cf6-b1c1-2a377a578162",
+    "revision": 0,
+    "last_node_id": 91,
+    "last_link_id": 230,
+    "nodes": [
+        {
+            "id": 61,
+            "type": "CLIPSetLastLayer",
+            "pos": [
+                -2480,
+                -160
+            ],
+            "size": [
+                450,
+                60
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 11,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "clip",
+                    "name": "clip",
+                    "type": "CLIP",
+                    "link": 157
+                },
+                {
+                    "localized_name": "stop_at_clip_layer",
+                    "name": "stop_at_clip_layer",
+                    "type": "INT",
+                    "widget": {
+                        "name": "stop_at_clip_layer"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "CLIP",
+                    "name": "CLIP",
+                    "type": "CLIP",
+                    "links": []
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.60",
+                "Node name for S&R": "CLIPSetLastLayer"
+            },
+            "widgets_values": [
+                -2
+            ]
+        },
+        {
+            "id": 34,
+            "type": "Seed (rgthree)",
+            "pos": [
+                -520,
+                -530
+            ],
+            "size": [
+                210,
+                130
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 0,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+                {
+                    "dir": 4,
+                    "name": "SEED",
+                    "shape": 3,
+                    "type": "INT",
+                    "slot_index": 0,
+                    "links": [
+                        164
+                    ]
+                }
+            ],
+            "properties": {
+                "cnr_id": "rgthree-comfy",
+                "ver": "32142fe476878a354dda6e2d4b5ea98960de3ced",
+                "randomMax": 1125899906842624,
+                "randomMin": 0
+            },
+            "widgets_values": [
+                161443220886185,
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "id": 5,
+            "type": "EmptyLatentImage",
+            "pos": [
+                -290,
+                -540
+            ],
+            "size": [
+                210,
+                140
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 1,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "width",
+                    "name": "width",
+                    "type": "INT",
+                    "widget": {
+                        "name": "width"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "height",
+                    "name": "height",
+                    "type": "INT",
+                    "widget": {
+                        "name": "height"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "batch_size",
+                    "name": "batch_size",
+                    "type": "INT",
+                    "widget": {
+                        "name": "batch_size"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "LATENT",
+                    "name": "LATENT",
+                    "type": "LATENT",
+                    "slot_index": 0,
+                    "links": [
+                        230
+                    ]
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.26",
+                "Node name for S&R": "EmptyLatentImage"
+            },
+            "widgets_values": [
+                832,
+                1216,
+                1
+            ]
+        },
+        {
+            "id": 3,
+            "type": "KSampler",
+            "pos": [
+                -520,
+                -350
+            ],
+            "size": [
+                440,
+                770
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 16,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "model",
+                    "name": "model",
+                    "type": "MODEL",
+                    "link": 219
+                },
+                {
+                    "localized_name": "positive",
+                    "name": "positive",
+                    "type": "CONDITIONING",
+                    "link": 154
+                },
+                {
+                    "localized_name": "negative",
+                    "name": "negative",
+                    "type": "CONDITIONING",
+                    "link": 155
+                },
+                {
+                    "localized_name": "latent_image",
+                    "name": "latent_image",
+                    "type": "LATENT",
+                    "link": 230
+                },
+                {
+                    "localized_name": "seed",
+                    "name": "seed",
+                    "type": "INT",
+                    "widget": {
+                        "name": "seed"
+                    },
+                    "link": 164
+                },
+                {
+                    "localized_name": "steps",
+                    "name": "steps",
+                    "type": "INT",
+                    "widget": {
+                        "name": "steps"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "cfg",
+                    "name": "cfg",
+                    "type": "FLOAT",
+                    "widget": {
+                        "name": "cfg"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "sampler_name",
+                    "name": "sampler_name",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "sampler_name"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "scheduler",
+                    "name": "scheduler",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "scheduler"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "denoise",
+                    "name": "denoise",
+                    "type": "FLOAT",
+                    "widget": {
+                        "name": "denoise"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "LATENT",
+                    "name": "LATENT",
+                    "type": "LATENT",
+                    "slot_index": 0,
+                    "links": [
+                        7
+                    ]
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.26",
+                "Node name for S&R": "KSampler"
+            },
+            "widgets_values": [
+                303997052534156,
+                "randomize",
+                30,
+                5,
+                "euler_ancestral",
+                "karras",
+                0.95
+            ]
+        },
+        {
+            "id": 60,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+                -2480,
+                -300
+            ],
+            "size": [
+                450,
+                100
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 2,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "ckpt_name",
+                    "name": "ckpt_name",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "ckpt_name"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "MODEL",
+                    "name": "MODEL",
+                    "type": "MODEL",
+                    "links": [
+                        213
+                    ]
+                },
+                {
+                    "localized_name": "CLIP",
+                    "name": "CLIP",
+                    "type": "CLIP",
+                    "links": [
+                        157,
+                        214
+                    ]
+                },
+                {
+                    "localized_name": "VAE",
+                    "name": "VAE",
+                    "type": "VAE",
+                    "links": [
+                        160
+                    ]
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.60",
+                "Node name for S&R": "CheckpointLoaderSimple"
+            },
+            "widgets_values": [
+                "ponyDiffusionV6XL_v6StartWithThisOne.safetensors"
+            ]
+        },
+        {
+            "id": 29,
+            "type": "PreviewImage",
+            "pos": [
+                -40,
+                -310
+            ],
+            "size": [
+                500,
+                680
+            ],
+            "flags": {
+                "collapsed": false,
+                "pinned": true
+            },
+            "order": 18,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "images",
+                    "name": "images",
+                    "type": "IMAGE",
+                    "link": 222
+                }
+            ],
+            "outputs": [],
+            "title": "Final",
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.26",
+                "Node name for S&R": "PreviewImage"
+            },
+            "widgets_values": [],
+            "color": "#222",
+            "bgcolor": "#000"
+        },
+        {
+            "id": 81,
+            "type": "MarkdownNote",
+            "pos": [
+                -2490,
+                -580
+            ],
+            "size": [
+                910,
+                180
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 3,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [],
+            "properties": {},
+            "widgets_values": [
+                "# 1. Model\n\nFirst, select a model, and a few LORAs.\n\nLORAs are helpful to steer the look of your character for a more coherent style across generations."
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
+        },
+        {
+            "id": 84,
+            "type": "MarkdownNote",
+            "pos": [
+                -530,
+                -780
+            ],
+            "size": [
+                460,
+                150
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 4,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [],
+            "properties": {},
+            "widgets_values": [
+                "# 3. Sampling\n\nIt is recommended to use a fixed seed to minimize differences between generations. "
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
+        },
+        {
+            "id": 8,
+            "type": "VAEDecode",
+            "pos": [
+                -690,
+                420
+            ],
+            "size": [
+                335.3999938964844,
+                69.0999984741211
+            ],
+            "flags": {
+                "collapsed": true,
+                "pinned": true
+            },
+            "order": 17,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "samples",
+                    "name": "samples",
+                    "type": "LATENT",
+                    "link": 7
+                },
+                {
+                    "localized_name": "vae",
+                    "name": "vae",
+                    "type": "VAE",
+                    "link": 160
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "IMAGE",
+                    "name": "IMAGE",
+                    "type": "IMAGE",
+                    "slot_index": 0,
+                    "links": [
+                        222,
+                        223
+                    ]
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.26",
+                "Node name for S&R": "VAEDecode"
+            },
+            "widgets_values": []
+        },
+        {
+            "id": 85,
+            "type": "MarkdownNote",
+            "pos": [
+                -50,
+                -560
+            ],
+            "size": [
+                1290,
+                150
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 5,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [],
+            "properties": {},
+            "widgets_values": [
+                "# 4. Output\n\nGo to your character's page in Voxta, and under Assets, copy the path. Use this for voxta_data_path. Subfolder can be Default for most cases. "
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
+        },
+        {
+            "id": 42,
+            "type": "UltralyticsDetectorProvider",
+            "pos": [
+                410,
+                1660
+            ],
+            "size": [
+                454.6000061035156,
+                78
+            ],
+            "flags": {
+                "collapsed": true
+            },
+            "order": 6,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "model_name",
+                    "name": "model_name",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "model_name"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "BBOX_DETECTOR",
+                    "name": "BBOX_DETECTOR",
+                    "type": "BBOX_DETECTOR",
+                    "links": []
+                },
+                {
+                    "localized_name": "SEGM_DETECTOR",
+                    "name": "SEGM_DETECTOR",
+                    "type": "SEGM_DETECTOR",
+                    "links": []
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfyui-impact-subpack",
+                "ver": "1.2.10",
+                "Node name for S&R": "UltralyticsDetectorProvider"
+            },
+            "widgets_values": [
+                "bbox/face_yolov8m.pt"
+            ]
+        },
+        {
+            "id": 65,
+            "type": "JjkText",
+            "pos": [
+                -1160,
+                -300
+            ],
+            "size": [
+                600,
+                290
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 7,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "text"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "links": [
+                        228
+                    ]
+                }
+            ],
+            "title": "Emotes",
+            "properties": {
+                "cnr_id": "jjk",
+                "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
+                "Node name for S&R": "JjkText"
+            },
+            "widgets_values": [
+                "Neutral@simple smile\nLove@heart-shaped pupils, loving\nUnhappy@pouting, unhappy\nSmile@big smile, happy\nLaugh@laugh\nCry@sad, pouting\nFear@afraid, worried\nAngry@angry, anger mark\nHorny@horny, hearts, blushing\nQuestion@confused, question marks, raised eyebrow\nSurprise@surprised, exclamation mark"
+            ]
+        },
+        {
+            "id": 55,
+            "type": "CLIPTextEncode",
+            "pos": [
+                -1130,
+                420
+            ],
+            "size": [
+                360,
+                88
+            ],
+            "flags": {
+                "collapsed": true,
+                "pinned": true
+            },
+            "order": 15,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "clip",
+                    "name": "clip",
+                    "type": "CLIP",
+                    "link": 217
+                },
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "text"
+                    },
+                    "link": 225
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "CONDITIONING",
+                    "name": "CONDITIONING",
+                    "type": "CONDITIONING",
+                    "links": [
+                        154
+                    ]
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.60",
+                "Node name for S&R": "CLIPTextEncode"
+            },
+            "widgets_values": [
+                ""
+            ]
+        },
+        {
+            "id": 91,
+            "type": "LoraLoader",
+            "pos": [
+                -1990,
+                -300
+            ],
+            "size": [
+                400,
+                126
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 12,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "model",
+                    "name": "model",
+                    "type": "MODEL",
+                    "link": 213
+                },
+                {
+                    "localized_name": "clip",
+                    "name": "clip",
+                    "type": "CLIP",
+                    "link": 214
+                },
+                {
+                    "localized_name": "lora_name",
+                    "name": "lora_name",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "lora_name"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "strength_model",
+                    "name": "strength_model",
+                    "type": "FLOAT",
+                    "widget": {
+                        "name": "strength_model"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "strength_clip",
+                    "name": "strength_clip",
+                    "type": "FLOAT",
+                    "widget": {
+                        "name": "strength_clip"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "MODEL",
+                    "name": "MODEL",
+                    "type": "MODEL",
+                    "links": [
+                        219
+                    ]
+                },
+                {
+                    "localized_name": "CLIP",
+                    "name": "CLIP",
+                    "type": "CLIP",
+                    "links": [
+                        216,
+                        217
+                    ]
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.63",
+                "Node name for S&R": "LoraLoader"
+            },
+            "widgets_values": [
+                "",
+                1,
+                1
+            ]
+        },
+        {
+            "id": 63,
+            "type": "PromptCombinator",
+            "pos": [
+                -1540,
+                420
+            ],
+            "size": [
+                390,
+                578
+            ],
+            "flags": {
+                "collapsed": true,
+                "pinned": true
+            },
+            "order": 13,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "id_separator",
+                    "name": "id_separator",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "id_separator"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "comment_prefix",
+                    "name": "comment_prefix",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "comment_prefix"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "join_prompt_using",
+                    "name": "join_prompt_using",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "join_prompt_using"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "input_list_1",
+                    "name": "input_list_1",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_1"
+                    },
+                    "link": 227
+                },
+                {
+                    "localized_name": "input_list_2",
+                    "name": "input_list_2",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_2"
+                    },
+                    "link": 228
+                },
+                {
+                    "localized_name": "input_list_3",
+                    "name": "input_list_3",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_3"
+                    },
+                    "link": 229
+                },
+                {
+                    "localized_name": "input_list_4",
+                    "name": "input_list_4",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_4"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "input_list_5",
+                    "name": "input_list_5",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_5"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "input_list_6",
+                    "name": "input_list_6",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_6"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "input_list_7",
+                    "name": "input_list_7",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_7"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "input_list_8",
+                    "name": "input_list_8",
+                    "shape": 7,
+                    "type": "STRING",
+                    "widget": {
+                        "name": "input_list_8"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "prompts",
+                    "name": "prompts",
+                    "shape": 6,
+                    "type": "STRING",
+                    "links": [
+                        194,
+                        225
+                    ]
+                },
+                {
+                    "localized_name": "combination_ids",
+                    "name": "combination_ids",
+                    "shape": 6,
+                    "type": "PROMPTCOMBINATORIDS",
+                    "links": [
+                        224
+                    ]
+                },
+                {
+                    "localized_name": "filenames",
+                    "name": "filenames",
+                    "shape": 6,
+                    "type": "STRING",
+                    "links": null
+                }
+            ],
+            "properties": {
+                "cnr_id": "comfyui-prompt-combinator",
+                "ver": "3576ace3f2776918c1046b6674fbe345a46dba2f",
+                "Node name for S&R": "PromptCombinator"
+            },
+            "widgets_values": [
+                "@",
+                "#",
+                "comma and space",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "id": 68,
+            "type": "JjkText",
+            "pos": [
+                -1550,
+                -300
+            ],
+            "size": [
+                370,
+                360
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 8,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "text"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "links": [
+                        227
+                    ]
+                }
+            ],
+            "title": "Basic Prompt",
+            "properties": {
+                "cnr_id": "jjk",
+                "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
+                "Node name for S&R": "JjkText"
+            },
+            "widgets_values": [
+                "1girl black hair, twin ponytails, (green eyes:1.2), portrait front view, simple black t-shirt with smiley logo, medium chest, left shoulder visible, simple pure black background"
+            ]
+        },
+        {
+            "id": 56,
+            "type": "CLIPTextEncode",
+            "pos": [
+                -1550,
+                110
+            ],
+            "size": [
+                370,
+                200
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 14,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "clip",
+                    "name": "clip",
+                    "type": "CLIP",
+                    "link": 216
+                },
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "text"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "CONDITIONING",
+                    "name": "CONDITIONING",
+                    "type": "CONDITIONING",
+                    "links": [
+                        155
+                    ]
+                }
+            ],
+            "title": "Negative (General)",
+            "properties": {
+                "cnr_id": "comfy-core",
+                "ver": "0.3.60",
+                "Node name for S&R": "CLIPTextEncode"
+            },
+            "widgets_values": [
+                "(text, words, speech:1.2), deformed, mutated, disfigured, long body, lowres, bad anatomy, bad hands, missing fingers, extra digits, fewer digits, very displeasing, (worst quality, bad quality:0.8), bad anatomy, sketch, jpeg artifacts, signature, watermark, username, conjoined, bad ai-generated,"
+            ]
+        },
+        {
+            "id": 66,
+            "type": "JjkText",
+            "pos": [
+                -1160,
+                40
+            ],
+            "size": [
+                600,
+                270
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 9,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "text"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "text",
+                    "name": "text",
+                    "type": "STRING",
+                    "links": [
+                        229
+                    ]
+                }
+            ],
+            "title": "States",
+            "properties": {
+                "cnr_id": "jjk",
+                "ver": "b3c99bb78a99551776b5eab1a820e1cd58f84f31",
+                "Node name for S&R": "JjkText"
+            },
+            "widgets_values": [
+                "Idle@looking at viewer, mouth closed\nThinking@thinking, finger on lips, looking away, tilted head\nTalking1@(open mouth:1.1), looking at viewer, (gesturing), stare, (talking:1.2), oh mouth, passion\nTalking2@(open mouth:1.1), looking at viewer, (tilted head:1.2), (explaining:1.05), ah mouth, squinting\nTalking3@(open mouth:1.1), looking at viewer, (talking:1.2), discussion, ih mouth, eyebrows up"
+            ]
+        },
+        {
+            "id": 82,
+            "type": "MarkdownNote",
+            "pos": [
+                -1560,
+                -580
+            ],
+            "size": [
+                1010,
+                180
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 10,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [],
+            "properties": {},
+            "widgets_values": [
+                "# 2. Prompt\n\nThe Shared Prefix and Shared Suffix will be added before and after every generation, and should be your model's recommended prompting instructions.\n\nBasic Prompt is your character prompt.\n\nEmotes is the list of emotions Voxta can use. Use `#` before one line to comment it out if you want to experiment.\n\nStates is either Idle, Thinking or Talking. You can have several versions of each if you want more variety."
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
+        },
+        {
+            "id": 77,
+            "type": "VoxtaExportCharacter",
+            "pos": [
+                480,
+                -300
+            ],
+            "size": [
+                750,
+                350
+            ],
+            "flags": {
+                "pinned": true
+            },
+            "order": 19,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "images",
+                    "name": "images",
+                    "type": "IMAGE",
+                    "link": 223
+                },
+                {
+                    "localized_name": "prompts",
+                    "name": "prompts",
+                    "type": "STRING",
+                    "link": 194
+                },
+                {
+                    "localized_name": "combination_ids",
+                    "name": "combination_ids",
+                    "type": "PROMPTCOMBINATORIDS",
+                    "link": 224
+                },
+                {
+                    "localized_name": "output_path",
+                    "name": "output_path",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "output_path"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "subfolder",
+                    "name": "subfolder",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "subfolder"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "output_format",
+                    "name": "output_format",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "output_format"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "on_exists",
+                    "name": "on_exists",
+                    "shape": 7,
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "on_exists"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "IMAGE",
+                    "name": "IMAGE",
+                    "type": "IMAGE",
+                    "links": null
+                }
+            ],
+            "properties": {
+                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
+                "ver": "8df5b4c25019e2c3144bd805be70400809a2f25c",
+                "Node name for S&R": "VoxtaExportCharacter"
+            },
+            "widgets_values": [
+                "",
+                "Avatars/Default",
+                ".webp lossy 80",
+                "append"
+            ]
+        }
+    ],
+    "links": [
+        [
+            7,
+            3,
+            0,
+            8,
+            0,
+            "LATENT"
+        ],
+        [
+            154,
+            55,
+            0,
+            3,
+            1,
+            "CONDITIONING"
+        ],
+        [
+            155,
+            56,
+            0,
+            3,
+            2,
+            "CONDITIONING"
+        ],
+        [
+            157,
+            60,
+            1,
+            61,
+            0,
+            "CLIP"
+        ],
+        [
+            160,
+            60,
+            2,
+            8,
+            1,
+            "VAE"
+        ],
+        [
+            164,
+            34,
+            0,
+            3,
+            4,
+            "INT"
+        ],
+        [
+            194,
+            63,
+            0,
+            77,
+            1,
+            "STRING"
+        ],
+        [
+            213,
+            60,
+            0,
+            91,
+            0,
+            "MODEL"
+        ],
+        [
+            214,
+            60,
+            1,
+            91,
+            1,
+            "CLIP"
+        ],
+        [
+            216,
+            91,
+            1,
+            56,
+            0,
+            "CLIP"
+        ],
+        [
+            217,
+            91,
+            1,
+            55,
+            0,
+            "CLIP"
+        ],
+        [
+            219,
+            91,
+            0,
+            3,
+            0,
+            "MODEL"
+        ],
+        [
+            222,
+            8,
+            0,
+            29,
+            0,
+            "IMAGE"
+        ],
+        [
+            223,
+            8,
+            0,
+            77,
+            0,
+            "IMAGE"
+        ],
+        [
+            224,
+            63,
+            1,
+            77,
+            2,
+            "PROMPTCOMBINATORIDS"
+        ],
+        [
+            225,
+            63,
+            0,
+            55,
+            1,
+            "STRING"
+        ],
+        [
+            227,
+            68,
+            0,
+            63,
+            3,
+            "STRING"
+        ],
+        [
+            228,
+            65,
+            0,
+            63,
+            4,
+            "STRING"
+        ],
+        [
+            229,
+            66,
+            0,
+            63,
+            5,
+            "STRING"
+        ],
+        [
+            230,
+            5,
+            0,
+            3,
+            3,
+            "LATENT"
+        ]
+    ],
+    "groups": [
+        {
+            "id": 2,
+            "title": "Model",
+            "bounding": [
+                -2490,
+                -380,
+                470,
+                290
+            ],
+            "color": "#3f789e",
+            "font_size": 24,
+            "flags": {
+                "pinned": true
+            }
+        },
+        {
+            "id": 3,
+            "title": "Loras",
+            "bounding": [
+                -2000,
+                -380,
+                420,
+                820
+            ],
+            "color": "#3f789e",
+            "font_size": 24,
+            "flags": {
+                "pinned": true
+            }
+        },
+        {
+            "id": 4,
+            "title": "Prompt",
+            "bounding": [
+                -1560,
+                -380,
+                1010,
+                700
+            ],
+            "color": "#3f789e",
+            "font_size": 24,
+            "flags": {
+                "pinned": true
+            }
+        },
+        {
+            "id": 6,
+            "title": "Sampling",
+            "bounding": [
+                -530,
+                -610,
+                460,
+                1050
+            ],
+            "color": "#3f789e",
+            "font_size": 24,
+            "flags": {
+                "pinned": true
+            }
+        },
+        {
+            "id": 7,
+            "title": "Output",
+            "bounding": [
+                -50,
+                -390,
+                1290,
+                770
+            ],
+            "color": "#3f789e",
+            "font_size": 24,
+            "flags": {
+                "pinned": true
+            }
+        },
+        {
+            "id": 9,
+            "title": "Connectors",
+            "bounding": [
+                -1550,
+                340,
+                1000,
+                100
+            ],
+            "color": "#3f789e",
+            "font_size": 24,
+            "flags": {
+                "pinned": true
+            }
+        }
+    ],
+    "config": {},
+    "extra": {
+        "ds": {
+            "scale": 1,
+            "offset": [
+                342.595661622036,
+                406.92944164954815
+            ]
+        },
+        "frontendVersion": "1.17.11",
+        "groupNodes": {
+            "Prompt": {
+                "nodes": [
+                    {
+                        "id": -1,
+                        "type": "CLIPTextEncode",
+                        "pos": [
+                            379.289306640625,
+                            -71.94454193115234
+                        ],
+                        "size": [
+                            400,
+                            200
+                        ],
+                        "flags": {},
+                        "order": 4,
+                        "mode": 0,
+                        "inputs": [
+                            {
+                                "name": "clip",
+                                "type": "CLIP",
+                                "link": null,
+                                "localized_name": "clip"
+                            },
+                            {
+                                "name": "text",
+                                "localized_name": "text",
+                                "type": "STRING",
+                                "widget": {
+                                    "name": "text"
+                                },
+                                "boundingRect": [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "link": null
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "name": "CONDITIONING",
+                                "type": "CONDITIONING",
+                                "links": [],
+                                "slot_index": 0,
+                                "localized_name": "CONDITIONING"
+                            }
+                        ],
+                        "properties": {
+                            "Node name for S&R": "CLIPTextEncode"
+                        },
+                        "widgets_values": [
+                            "score_9, score_8_up, score_7_up, 1girl, 18years old, solo, catgirl, black hair, ((college girl)), (freckles, body freckles), cat ears, small round breasts, horny girl, perfect (cute:1.1) face, black tank top, long straight hair, perfect sexy face, green eyes, straight hair, thin hair, expressive happy, pale skin, curvy, straight bangs, ((nighttime, dark lighting, dark background)), blushing, navel, nsfw, EyesHD, (arms towards viewer:1.2), kabedon, (incoming hug:1.2)"
+                        ],
+                        "index": 0
+                    },
+                    {
+                        "id": -1,
+                        "type": "CLIPTextEncode",
+                        "pos": [
+                            379.97369384765625,
+                            179.535888671875
+                        ],
+                        "size": [
+                            400,
+                            200
+                        ],
+                        "flags": {},
+                        "order": 5,
+                        "mode": 0,
+                        "inputs": [
+                            {
+                                "name": "clip",
+                                "type": "CLIP",
+                                "link": null,
+                                "localized_name": "clip"
+                            },
+                            {
+                                "name": "text",
+                                "localized_name": "text",
+                                "type": "STRING",
+                                "widget": {
+                                    "name": "text"
+                                },
+                                "boundingRect": [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "link": null
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "name": "CONDITIONING",
+                                "type": "CONDITIONING",
+                                "links": [],
+                                "slot_index": 0,
+                                "localized_name": "CONDITIONING"
+                            }
+                        ],
+                        "properties": {
+                            "Node name for S&R": "CLIPTextEncode"
+                        },
+                        "widgets_values": [
+                            "core_6, score_5, score_4, worst quality, low quality, text, censored, deformed, bad hand, blurry, (watermark), multiple phones, weights, bunny ears, extra hands, feet"
+                        ],
+                        "index": 1
+                    }
+                ],
+                "links": [
+                    [
+                        null,
+                        1,
+                        0,
+                        0,
+                        26,
+                        "CLIP"
+                    ],
+                    [
+                        null,
+                        1,
+                        1,
+                        0,
+                        26,
+                        "CLIP"
+                    ]
+                ],
+                "external": [
+                    [
+                        0,
+                        0,
+                        "CONDITIONING"
+                    ],
+                    [
+                        1,
+                        0,
+                        "CONDITIONING"
+                    ]
+                ],
+                "config": {
+                    "0": {
+                        "input": {
+                            "clip": {
+                                "name": "Prompt"
+                            },
+                            "text": {
+                                "name": "Prompt"
+                            }
+                        },
+                        "output": {
+                            "0": {
+                                "name": "Prompt"
+                            }
+                        }
+                    },
+                    "1": {
+                        "input": {
+                            "clip": {
+                                "name": "Negative Prompt"
+                            },
+                            "text": {
+                                "name": "Negative Prompt"
+                            }
+                        },
+                        "output": {
+                            "0": {
+                                "name": "Negative Prompt"
+                            }
+                        }
+                    }
+                }
+            },
+            "Prompts": {
+                "nodes": [
+                    {
+                        "id": -1,
+                        "type": "CLIPTextEncode",
+                        "pos": [
+                            -488.098876953125,
+                            -152.69178771972656
+                        ],
+                        "size": [
+                            672.6454467773438,
+                            227.49087524414062
+                        ],
+                        "flags": {},
+                        "order": 7,
+                        "mode": 0,
+                        "inputs": [
+                            {
+                                "localized_name": "clip",
+                                "name": "clip",
+                                "type": "CLIP",
+                                "link": null
+                            },
+                            {
+                                "localized_name": "text",
+                                "name": "text",
+                                "type": "STRING",
+                                "widget": {
+                                    "name": "text"
+                                },
+                                "link": null
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "localized_name": "CONDITIONING",
+                                "name": "CONDITIONING",
+                                "type": "CONDITIONING",
+                                "links": []
+                            }
+                        ],
+                        "properties": {
+                            "cnr_id": "comfy-core",
+                            "ver": "0.3.29",
+                            "Node name for S&R": "CLIPTextEncode"
+                        },
+                        "widgets_values": [
+                            "skinny futanari, cute, erect penis"
+                        ],
+                        "index": 0
+                    },
+                    {
+                        "id": -1,
+                        "type": "CLIPTextEncode",
+                        "pos": [
+                            -487.4259033203125,
+                            143.26268005371094
+                        ],
+                        "size": [
+                            690.9090576171875,
+                            172.72727966308594
+                        ],
+                        "flags": {},
+                        "order": 8,
+                        "mode": 0,
+                        "inputs": [
+                            {
+                                "localized_name": "clip",
+                                "name": "clip",
+                                "type": "CLIP",
+                                "link": null
+                            },
+                            {
+                                "localized_name": "text",
+                                "name": "text",
+                                "type": "STRING",
+                                "widget": {
+                                    "name": "text"
+                                },
+                                "link": null
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "localized_name": "CONDITIONING",
+                                "name": "CONDITIONING",
+                                "type": "CONDITIONING",
+                                "links": []
+                            }
+                        ],
+                        "properties": {
+                            "cnr_id": "comfy-core",
+                            "ver": "0.3.29",
+                            "Node name for S&R": "CLIPTextEncode"
+                        },
+                        "widgets_values": [
+                            "child, asian, multiple people"
+                        ],
+                        "index": 1
+                    }
+                ],
+                "links": [
+                    [
+                        null,
+                        0,
+                        0,
+                        0,
+                        30,
+                        "CLIP"
+                    ],
+                    [
+                        null,
+                        0,
+                        1,
+                        0,
+                        30,
+                        "CLIP"
+                    ]
+                ],
+                "external": [
+                    [
+                        0,
+                        0,
+                        "CONDITIONING"
+                    ],
+                    [
+                        1,
+                        0,
+                        "CONDITIONING"
+                    ]
+                ],
+                "config": {
+                    "0": {
+                        "input": {
+                            "text": {
+                                "name": "Positive"
+                            }
+                        },
+                        "output": {
+                            "0": {
+                                "name": "positive cond"
+                            }
+                        }
+                    },
+                    "1": {
+                        "input": {
+                            "text": {
+                                "name": "Negative"
+                            },
+                            "clip": {
+                                "name": "clip"
+                            }
+                        },
+                        "output": {
+                            "0": {
+                                "name": "negative cond"
+                            }
+                        }
+                    }
+                }
+            },
+            "Models": {
+                "nodes": [
+                    {
+                        "id": -1,
+                        "type": "UpscaleModelLoader",
+                        "pos": [
+                            -1057.5,
+                            693.5003051757812
+                        ],
+                        "size": [
+                            363.3999938964844,
+                            63.5
+                        ],
+                        "flags": {},
+                        "order": 3,
+                        "mode": 0,
+                        "inputs": [
+                            {
+                                "localized_name": "model_name",
+                                "name": "model_name",
+                                "type": "COMBO",
+                                "widget": {
+                                    "name": "model_name"
+                                },
+                                "link": null
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "localized_name": "UPSCALE_MODEL",
+                                "name": "UPSCALE_MODEL",
+                                "type": "UPSCALE_MODEL",
+                                "slot_index": 0,
+                                "links": []
+                            }
+                        ],
+                        "properties": {
+                            "cnr_id": "comfy-core",
+                            "ver": "0.3.26",
+                            "Node name for S&R": "UpscaleModelLoader"
+                        },
+                        "widgets_values": [
+                            "4x_NMKD-Siax_200k.pth"
+                        ],
+                        "index": 0
+                    },
+                    {
+                        "id": -1,
+                        "type": "CheckpointLoaderSimple",
+                        "pos": [
+                            -1052.0625,
+                            -24.836301803588867
+                        ],
+                        "size": [
+                            335.6000061035156,
+                            101.30000305175781
+                        ],
+                        "flags": {},
+                        "order": 4,
+                        "mode": 0,
+                        "inputs": [
+                            {
+                                "localized_name": "ckpt_name",
+                                "name": "ckpt_name",
+                                "type": "COMBO",
+                                "widget": {
+                                    "name": "ckpt_name"
+                                },
+                                "link": null
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "localized_name": "MODEL",
+                                "name": "MODEL",
+                                "type": "MODEL",
+                                "slot_index": 0,
+                                "links": []
+                            },
+                            {
+                                "localized_name": "CLIP",
+                                "name": "CLIP",
+                                "type": "CLIP",
+                                "slot_index": 1,
+                                "links": []
+                            },
+                            {
+                                "localized_name": "VAE",
+                                "name": "VAE",
+                                "type": "VAE",
+                                "slot_index": 2,
+                                "links": []
+                            }
+                        ],
+                        "properties": {
+                            "cnr_id": "comfy-core",
+                            "ver": "0.3.26",
+                            "Node name for S&R": "CheckpointLoaderSimple"
+                        },
+                        "widgets_values": [
+                            "illustriousRealismBy_v10VAE.safetensors"
+                        ],
+                        "index": 1
+                    },
+                    {
+                        "id": -1,
+                        "type": "CLIPSetLastLayer",
+                        "pos": [
+                            -1059.769775390625,
+                            579.5414428710938
+                        ],
+                        "size": [
+                            355.70001220703125,
+                            61.29999923706055
+                        ],
+                        "flags": {},
+                        "order": 6,
+                        "mode": 0,
+                        "inputs": [
+                            {
+                                "localized_name": "clip",
+                                "name": "clip",
+                                "type": "CLIP",
+                                "link": null
+                            },
+                            {
+                                "localized_name": "stop_at_clip_layer",
+                                "name": "stop_at_clip_layer",
+                                "type": "INT",
+                                "widget": {
+                                    "name": "stop_at_clip_layer"
+                                },
+                                "link": null
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "localized_name": "CLIP",
+                                "name": "CLIP",
+                                "type": "CLIP",
+                                "slot_index": 0,
+                                "links": []
+                            }
+                        ],
+                        "properties": {
+                            "cnr_id": "comfy-core",
+                            "ver": "0.3.26",
+                            "Node name for S&R": "CLIPSetLastLayer"
+                        },
+                        "widgets_values": [
+                            -2
+                        ],
+                        "index": 2
+                    }
+                ],
+                "links": [
+                    [
+                        null,
+                        1,
+                        2,
+                        0,
+                        26,
+                        "CLIP"
+                    ]
+                ],
+                "external": [
+                    [
+                        0,
+                        0,
+                        "UPSCALE_MODEL"
+                    ],
+                    [
+                        1,
+                        0,
+                        "MODEL"
+                    ],
+                    [
+                        1,
+                        1,
+                        "CLIP"
+                    ],
+                    [
+                        1,
+                        2,
+                        "VAE"
+                    ],
+                    [
+                        2,
+                        0,
+                        "CLIP"
+                    ]
+                ]
+            }
+        },
+        "node_versions": {
+            "comfy-core": "0.3.12",
+            "save-image-extended-comfyui": "37401bc6e6d53ab719ef7a7a036664d1862ee243",
+            "rgthree-comfy": "dd534e5384be8cf0c0fa35865afe2126ba75ac55"
+        }
+    },
+    "version": 0.4
+}

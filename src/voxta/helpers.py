@@ -23,18 +23,35 @@ except Exception:  # pragma: no cover
     np = None  # type: ignore
 
 
-class FolderHelper:
-    """Helper to manage folder paths."""
-
+class ComfyHelper:
     @staticmethod
-    def get_output_directory(target: list[str], subfolder: list[str]) -> str:
-        output_path = target[0].strip() if len(target) else folder_paths.get_output_directory()
+    def comfy_input_to_str(value: list[str] | str, default: str = "") -> str:
+        print(r"[VOXTA DEBUG] Raw folder input:", repr(value))
+        if isinstance(value, str):
+            v = value.strip()
+            print(r"[VOXTA DEBUG] Interpreted as string:", repr(v))
+            return v or default
+        # sequence / list-like
+        if len(value):
+            v = str(value[0]).strip()
+            print(r"[VOXTA DEBUG] Interpreted as list, first item:", repr(v))
+            return v or default
+        print(r"[VOXTA DEBUG] Interpreted as empty list, using default:", repr(default))
+        return default
+
+
+class FolderHelper:
+    @staticmethod
+    def get_output_directory(target: list[str] | str, subfolder: list[str] | str) -> str:
+        output_path = ComfyHelper.comfy_input_to_str(target)
+        output_path = FolderHelper.sanitize_full_path(output_path) or folder_paths.get_output_directory()
         os.makedirs(output_path, exist_ok=True)
-        subfolder = subfolder[0] if len(subfolder) else ""
-        if subfolder:
-            subfolder = FolderHelper.sanitize_subfolder(subfolder)
-            output_path = os.path.join(output_path, subfolder)
-            os.makedirs(output_path, exist_ok=True)
+        raw_sub = ComfyHelper.comfy_input_to_str(subfolder, "")
+        if raw_sub:
+            raw_sub = FolderHelper.sanitize_subfolder(raw_sub)
+            if raw_sub:
+                output_path = os.path.join(output_path, raw_sub)
+                os.makedirs(output_path, exist_ok=True)
         return output_path
 
     @staticmethod

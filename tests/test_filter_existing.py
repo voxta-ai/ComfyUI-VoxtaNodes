@@ -20,7 +20,7 @@ def test_filter_keeps_when_no_enumerated_exists(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[True],
+        do_not_render_if_already_exists=[True],
     )
     assert res["ui"]["skipped"][0] == 0
     assert res["ui"]["kept"][0] == 2
@@ -44,7 +44,7 @@ def test_filter_skips_when_index_01_exists(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[True],
+        do_not_render_if_already_exists=[True],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -68,7 +68,7 @@ def test_filter_skips_when_other_index_exists(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[True],
+        do_not_render_if_already_exists=[True],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -99,7 +99,7 @@ def test_filter_multiple_mixed(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[True],
+        do_not_render_if_already_exists=[True],
     )
     # Two stems skipped, two kept
     assert res["ui"]["skipped"][0] == 2
@@ -124,7 +124,7 @@ def test_filter_prompts_filtered_with_combinations(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[True],
+        do_not_render_if_already_exists=[True],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -147,7 +147,7 @@ def test_filter_prompts_broadcast_mode(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[True],
+        do_not_render_if_already_exists=[True],
     )
     assert res["ui"]["kept"][0] == 2
     assert res["result"][1] == ["shared prompt", "shared prompt"]
@@ -166,7 +166,7 @@ def test_filter_prompts_true_length_mismatch_raises(tmp_path):
             prompts=prompts,
             output_path=[str(root)],
             subfolder=[sub],
-            skip_existing_targets=[True],
+            do_not_render_if_already_exists=[True],
         )
 
 
@@ -185,7 +185,7 @@ def test_filter_handles_list_wrapped_path(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[True],
+        do_not_render_if_already_exists=[True],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -209,7 +209,7 @@ def test_filter_bypass_mode(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        skip_existing_targets=[False],  # bypass filtering
+        do_not_render_if_already_exists=[False],  # bypass filtering
     )
     assert res["result"][0] == combos
     assert res["result"][1] == ["p1", "p2"]
@@ -233,5 +233,5 @@ def test_filter_all_skipped_raises(tmp_path):
             prompts=prompts,
             output_path=[str(root)],
             subfolder=[sub],
-            skip_existing_targets=[True],
+            do_not_render_if_already_exists=[True],
         )

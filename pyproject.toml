@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "voxta"
-version = "0.0.1"
+version = "0.0.2"
 description = "ComfyUI nodes to create and integrate with Voxta"
 authors = [
   {name = "Team Voxta", email = "info@voxta.ai"}

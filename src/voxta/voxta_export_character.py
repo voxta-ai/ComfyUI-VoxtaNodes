@@ -1,7 +1,7 @@
 import os
 import re
 from .naming import determine_filename
-from .helpers import IdFilenameBuilder, ImageExporter, FolderHelper
+from .helpers import IdFilenameBuilder, ImageExporter, FolderHelper, ComfyHelper
 
 try:  # pragma: no cover
     import folder_paths  # type: ignore
@@ -18,6 +18,8 @@ class VoxtaExportCharacter:
     def INPUT_TYPES(cls):
         return {
             "required": {
+                "output_path": ("STRING", {"default": "", "multiline": False}),
+                "subfolder": ("STRING", {"default": "Avatars/Default", "multiline": False}),
                 "output_format": (
                     [
                         ".webp lossy 80",
@@ -32,14 +34,6 @@ class VoxtaExportCharacter:
                 "combination_ids": ("PROMPTCOMBINATORIDS",),
             },
             "optional": {
-                # Single unified output path. If empty, falls back to ComfyUI output directory.
-                "output_path": ("STRING", {"default": "", "multiline": False}),
-                # Optional subfolder under the chosen root.
-                "subfolder": ("STRING", {"default": "Avatars/Default", "multiline": False}),
-                # How to handle an existing filename on disk.
-                # append   -> current behavior: find next free enumerated name.
-                # overwrite-> reuse the enumerated name even if exists and overwrite the file.
-                # skip     -> if the enumerated name exists, do not save (omit from results).
                 "on_exists": (
                     ["append", "overwrite", "skip"],
                     {"default": "append"},
@@ -61,17 +55,19 @@ class VoxtaExportCharacter:
     # noinspection PyMethodMayBeStatic
     def execute(
         self,
-        output_format: list[str],
+        output_format: list[str] | str,
         images: list[object],
         prompts: list[str],
         combination_ids: list[list[str]],
-        output_path: list[str],
-        subfolder: list[str],
-        on_exists: list[str],
+        output_path: list[str] | str,
+        subfolder: list[str] | str,
+        on_exists: list[str] | str,
     ):
         save_dir = FolderHelper.get_output_directory(output_path, subfolder)
-        output_format = output_format[0] if output_format else ".webp lossy 90"
-        on_exists = on_exists[0] if on_exists else "append"
+        print("[Voxta] Filtering existing combinations in:", save_dir)
+
+        output_format = ComfyHelper.comfy_input_to_str(output_format)
+        on_exists = ComfyHelper.comfy_input_to_str(on_exists)
         if on_exists not in {"append", "overwrite", "skip"}:
             raise ValueError(f"Invalid on_exists option: {on_exists}")
 

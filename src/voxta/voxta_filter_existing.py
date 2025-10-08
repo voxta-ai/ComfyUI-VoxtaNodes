@@ -17,26 +17,15 @@ logger = logging.getLogger(__name__)
 
 
 class VoxtaFilterExistingCombinations:
-    """Filter existing combinations from PromptCombinator output.
-
-    Simplified rule (index-aware):
-    - If an ID ends with digits (e.g. Talking5), those digits define a desired base index.
-      We only skip that combination if a file for the SAME stem (without digits) and the SAME index already exists.
-    - If an ID does NOT end with digits, we fall back to the older behavior: skip if *any* enumerated file for that stem exists.
-    This prevents unrelated numbered variants (Talking1 vs Talking2) from colliding and being over-filtered.
-    """
-
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "combination_ids": ("PROMPTCOMBINATORIDS",),
-                "prompts": ("STRING", {"forceInput": True}),
-            },
-            "optional": {
                 "output_path": ("STRING", {"default": "", "multiline": False}),
                 "subfolder": ("STRING", {"default": "Avatars/Default", "multiline": False}),
-                "skip_existing_targets": ("BOOLEAN", {"default": True}),
+                "combination_ids": ("PROMPTCOMBINATORIDS",),
+                "prompts": ("STRING", {"forceInput": True}),
+                "do_not_render_if_already_exists": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -52,11 +41,11 @@ class VoxtaFilterExistingCombinations:
         self,
         combination_ids: list[list[str]],
         prompts: list[str],
-        output_path: list[str],
-        subfolder: list[str],
-        skip_existing_targets: list[bool],
+        output_path: list[str] | str,
+        subfolder: list[str] | str,
+        do_not_render_if_already_exists: list[bool],
     ):
-        bypass = not (skip_existing_targets[0] if skip_existing_targets else True)
+        bypass = not (do_not_render_if_already_exists[0] if do_not_render_if_already_exists else True)
         if bypass:
             summary = f"Kept all {len(combination_ids)} combinations (bypass)"
             return {
@@ -65,6 +54,7 @@ class VoxtaFilterExistingCombinations:
             }
 
         save_dir = FolderHelper.get_output_directory(output_path, subfolder)
+        print("[Voxta] Filtering existing combinations in:", save_dir)
 
         # Prompt broadcasting
         if len(prompts) == 1 and len(combination_ids) > 1:

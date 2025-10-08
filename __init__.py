@@ -9,6 +9,7 @@ if _src_dir.is_dir():
     if _src_path not in sys.path:
         sys.path.insert(0, _src_path)
 
+from voxta.voxta_output_folder import VoxtaOutputFolder
 from voxta.voxta_export_character import VoxtaExportCharacter
 from voxta.voxta_filter_existing import VoxtaFilterExistingCombinations
 
@@ -16,20 +17,21 @@ WEB_DIRECTORY = "js"
 
 # Build mappings
 NODE_CLASS_MAPPINGS = {
+    "VoxtaOutputFolder": VoxtaOutputFolder,
     "VoxtaExportCharacter": VoxtaExportCharacter,
+    "VoxtaFilterExistingCombinations": VoxtaFilterExistingCombinations,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
+    "VoxtaOutputFolder": "Voxta: Output Folder",
     "VoxtaExportCharacter": "Voxta: Export Character",
+    "VoxtaFilterExistingCombinations": "Voxta: Filter Existing Combinations",
 }
-
-if VoxtaFilterExistingCombinations is not None:
-    NODE_CLASS_MAPPINGS["VoxtaFilterExistingCombinations"] = VoxtaFilterExistingCombinations  # type: ignore
-    NODE_DISPLAY_NAME_MAPPINGS["VoxtaFilterExistingCombinations"] = "Voxta: Filter Existing Combinations"
 
 __all__ = [
     "WEB_DIRECTORY",
     "NODE_CLASS_MAPPINGS",
     "NODE_DISPLAY_NAME_MAPPINGS",
+    "VoxtaOutputFolder",
     "VoxtaExportCharacter",
     "VoxtaFilterExistingCombinations",
 ]

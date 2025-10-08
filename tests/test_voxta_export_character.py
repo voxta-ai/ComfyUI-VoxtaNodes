@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from voxta_export_character import VoxtaExportCharacter
+from voxta.voxta_export_character import VoxtaExportCharacter
 from .conftest import make_rgba
 
 
@@ -51,9 +51,9 @@ def test_fallback_default_root(chdir_tmp):
         images=images,
         prompts=prompts,
         combination_ids=combination_ids,
-        output_path=[],
-        subfolder=[],
-        on_exists=[],
+        output_path=[""],
+        subfolder=[""],
+        on_exists=["append"],
     )
 
     filenames = result["ui"]["filenames"]
