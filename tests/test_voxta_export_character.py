@@ -128,3 +128,33 @@ def test_on_exists_skip(tmp_path):
     assert res["ui"]["skipped"] == [1]
     assert pre_file.read_bytes() == original_content  # unchanged
     assert res["ui"]["on_exists"] == ["skip"]
+
+
+def test_append_mode_numbered_id_advances(tmp_path):
+    node = VoxtaExportCharacter()
+    root = tmp_path / "root"
+    sub = "chars"
+    d = root / sub
+    d.mkdir(parents=True)
+    # Pre-create existing enumerations 01 and 02
+    (d / "Idle_Talking_01.webp").write_bytes(b"A")
+    (d / "Idle_Talking_02.webp").write_bytes(b"B")
+
+    images = [make_rgba()]
+    prompts = ["p"]
+    # "Talking2" should not overwrite _02, but produce _03
+    combination_ids = [["Idle", "Talking2"]]
+
+    res = node.execute(
+        output_format=[".webp lossy 90"],
+        images=images,
+        prompts=prompts,
+        combination_ids=combination_ids,
+        output_path=[str(root)],
+        subfolder=[sub],
+        on_exists=["append"],
+    )
+    assert res["ui"]["filenames"] == ["Idle_Talking_03.webp"], res["ui"]["filenames"]
+    assert (d / "Idle_Talking_01.webp").read_bytes() == b"A"
+    assert (d / "Idle_Talking_02.webp").read_bytes() == b"B"
+    assert (d / "Idle_Talking_03.webp").exists()
