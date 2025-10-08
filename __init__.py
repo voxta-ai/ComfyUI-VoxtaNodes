@@ -9,19 +9,29 @@ if _src_dir.is_dir():
     if _src_path not in sys.path:
         sys.path.insert(0, _src_path)
 
-# Import the node class from the installed / local package
+# Import node classes
 from voxta.voxta_export_character import VoxtaExportCharacter  # type: ignore  # noqa: E402
 
+try:  # pragma: no cover
+    from voxta.voxta_filter_existing import VoxtaFilterExistingCombinations  # type: ignore  # noqa: E402
+except Exception:  # pragma: no cover
+    VoxtaFilterExistingCombinations = None  # type: ignore
+
+# Build mappings
 NODE_CLASS_MAPPINGS = {
     "VoxtaExportCharacter": VoxtaExportCharacter,
 }
-
 NODE_DISPLAY_NAME_MAPPINGS = {
     "VoxtaExportCharacter": "Voxta: Export Character",
 }
+
+if VoxtaFilterExistingCombinations is not None:
+    NODE_CLASS_MAPPINGS["VoxtaFilterExistingCombinations"] = VoxtaFilterExistingCombinations  # type: ignore
+    NODE_DISPLAY_NAME_MAPPINGS["VoxtaFilterExistingCombinations"] = "Voxta: Filter Existing Combinations"
 
 __all__ = [
     "NODE_CLASS_MAPPINGS",
     "NODE_DISPLAY_NAME_MAPPINGS",
     "VoxtaExportCharacter",
+    "VoxtaFilterExistingCombinations",
 ]

@@ -8,19 +8,21 @@ from __future__ import annotations
 
 import os
 import logging
-from typing import List, Dict
+import re
+from typing import List
+
 from .helpers import IdFilenameBuilder
 
 logger = logging.getLogger(__name__)
 
 
-def determine_filename(ids: List[str], stem_counts: Dict[str, int], ext: str, save_dir: str) -> str:
+def determine_filename(ids: List[str], ext: str, save_dir: str) -> str:
     """Return a unique filename for the provided id list.
 
     Strategy:
     1. Sanitize the id list into a stem.
-    2. Maintain an in-memory counter per stem (stem_counts) to append a zero-padded index.
-    3. If a file with the computed name already exists on disk, increment until free (capped at 99).
+    2. Find existing files on disk with the same stem.
+    3. Determine the highest existing enumeration and add one.
 
     Raises
     ------
@@ -31,19 +33,27 @@ def determine_filename(ids: List[str], stem_counts: Dict[str, int], ext: str, sa
     if not stem:
         stem = "image"
 
-    count = stem_counts.get(stem, 0) + 1
+    # Regex to find stem_XX.ext
+    pattern = re.compile(f"^{re.escape(stem)}_(\\d+){re.escape(ext)}$")
 
-    def build_name(c: int) -> str:
-        return f"{stem}_{c:02d}{ext}"
+    max_found = 0
+    try:
+        for f in os.listdir(save_dir):
+            match = pattern.match(f)
+            if match:
+                num = int(match.group(1))
+                if num > max_found:
+                    max_found = num
+    except FileNotFoundError:
+        # Directory may not exist yet, which is fine
+        pass
 
-    final_name = build_name(count)
-    # Bump until unique on disk or limit reached
-    while os.path.exists(os.path.join(save_dir, final_name)):
-        count += 1
-        if count > 99:
-            raise ValueError(f"Exceeded 99 variations for stem '{stem}' in {save_dir}")
-        final_name = build_name(count)
-    stem_counts[stem] = count
+    count = max_found + 1
+
+    if count > 99:
+        raise ValueError(f"Exceeded 99 variations for stem '{stem}' in {save_dir}")
+
+    final_name = f"{stem}_{count:02d}{ext}"
 
     logger.debug("determine_filename: ids=%s stem=%s assigned=%s", ids, stem, final_name)
     return final_name

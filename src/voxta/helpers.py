@@ -3,6 +3,16 @@ import re
 from typing import Iterable
 
 try:  # pragma: no cover
+    import folder_paths  # type: ignore
+except Exception:  # pragma: no cover
+
+    class folder_paths:  # type: ignore
+        @staticmethod
+        def get_output_directory() -> str:
+            return os.path.join(os.getcwd(), "output")
+
+
+try:  # pragma: no cover
     from PIL import Image
 except Exception:  # pragma: no cover
     Image = None  # type: ignore
@@ -13,12 +23,23 @@ except Exception:  # pragma: no cover
     np = None  # type: ignore
 
 
-class IdFilenameBuilder:
-    """Responsible for sanitizing pieces and building unique filenames for new interface."""
+class FolderHelper:
+    """Helper to manage folder paths."""
+
+    @staticmethod
+    def get_output_directory(target: list[str], subfolder: list[str]) -> str:
+        output_path = target[0].strip() if len(target) else folder_paths.get_output_directory()
+        os.makedirs(output_path, exist_ok=True)
+        subfolder = subfolder[0] if len(subfolder) else ""
+        if subfolder:
+            subfolder = FolderHelper.sanitize_subfolder(subfolder)
+            output_path = os.path.join(output_path, subfolder)
+            os.makedirs(output_path, exist_ok=True)
+        return output_path
 
     @staticmethod
     def sanitize_subfolder(sub: str) -> str:
-        sub = re.sub(r'[\\/:*?"<>|]+', "_", sub or "").strip()
+        sub = re.sub(r'[:*?"<>|]+', "_", sub or "").strip()
         if sub in {".", ".."}:
             sub = ""
         sub = sub.replace(".", "")
@@ -31,6 +52,10 @@ class IdFilenameBuilder:
             return ""
         path = os.path.expanduser(os.path.expandvars(path))
         return os.path.abspath(path)
+
+
+class IdFilenameBuilder:
+    """Responsible for sanitizing pieces and building unique filenames for new interface."""
 
     @staticmethod
     def sanitize_id_filename(id_list: Iterable[str]) -> str:
