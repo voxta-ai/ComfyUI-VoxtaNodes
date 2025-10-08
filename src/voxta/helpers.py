@@ -59,6 +59,8 @@ class IdFilenameBuilder:
 
     @staticmethod
     def sanitize_id_filename(id_list: Iterable[str]) -> str:
+        # Remove entries that contain the substring _no_id_
+        id_list = [i for i in id_list if "_no_id_" not in i]
         # Join with underscore and aggressively sanitize; collapse repeats.
         raw = "_".join(id_list)
         raw = raw.replace(" ", "_")

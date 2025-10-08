@@ -77,17 +77,21 @@ class VoxtaFilterExistingCombinations:
         skipped_count = 0
 
         existing_stems = set()
-        for file in os.listdir(save_dir):
-            stem, _ = os.path.splitext(file)
-            # Strip any existing enumeration like _01, _02
-            stem = re.sub(r"_\d{2,}$", "", stem)
-            existing_stems.add(stem)
+        if os.path.exists(save_dir):
+            print("[Voxta] Scanning existing files in:", save_dir)
+            for file in os.listdir(save_dir):
+                stem, _ = os.path.splitext(file)
+                print("[Voxta] Found existing file:", file, "-> stem:", stem)
+                # Strip any existing enumeration like _01, _02
+                stem = re.sub(r"_\d{2,}$", "", stem)
+                existing_stems.add(stem)
 
         for cid, prompt in zip(combination_ids, prompts):
             stem = IdFilenameBuilder.sanitize_id_filename(cid)
+            print("[Voxta] Checking stem: %s", cid, stem)
             if stem in existing_stems:
                 skipped_count += 1
-                logger.info("Skipping existing combination: %s (stem: %s)", cid, stem)
+                print("[Voxta] Skipping existing combination: %s (stem: %s)", cid, stem)
                 continue
             kept_cids.append(cid)
             kept_prompts.append(prompt)
