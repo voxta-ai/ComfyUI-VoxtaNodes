@@ -13,22 +13,26 @@ _src = os.path.join(_root, "src")
 if os.path.isdir(_src) and _src not in sys.path:
     sys.path.insert(0, _src)
 
-from voxta_export_character import VoxtaExportCharacter
-from voxta_filter_existing import VoxtaFilterExistingCombinations
+from voxta.voxta_export_character import VoxtaExportCharacter  # type: ignore
+from voxta.voxta_filter_existing import VoxtaFilterExistingCombinations  # type: ignore
+from voxta.voxta_output_folder import VoxtaOutputFolder  # type: ignore
 
 NODE_CLASS_MAPPINGS = {
     "VoxtaExportCharacter": VoxtaExportCharacter,
     "VoxtaFilterExistingCombinations": VoxtaFilterExistingCombinations,
+    "VoxtaOutputFolder": VoxtaOutputFolder,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "VoxtaExportCharacter": "Voxta: Export Character",
     "VoxtaFilterExistingCombinations": "Voxta: Filter Existing Combinations",
+    "VoxtaOutputFolder": "Voxta: Output Folder",
 }
 
 __all__ = [
     "VoxtaExportCharacter",
     "VoxtaFilterExistingCombinations",
+    "VoxtaOutputFolder",
     "NODE_CLASS_MAPPINGS",
     "NODE_DISPLAY_NAME_MAPPINGS",
 ]
