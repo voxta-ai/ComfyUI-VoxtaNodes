@@ -39,7 +39,7 @@ def test_integration_with_filter(tmp_path):
         prompts=prompts,
         output_path=out_root,  # type: ignore[arg-type]
         subfolder=out_sub,  # type: ignore[arg-type]
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     assert res["ui"]["kept"][0] == 1
 

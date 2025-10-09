@@ -18,11 +18,8 @@ dependencies = [
     "numpy>=1.24.0",
 ]
 
-
-
 [project.optional-dependencies]
 dev = [
-    "bump-my-version",
     "coverage",  # testing
     "mypy",  # linting
     "pre-commit", # runs linting on commit
@@ -37,10 +34,10 @@ Documentation = "https://github.com/voxta-ai/voxta/wiki"
 
 
 [tool.comfy]
-PublisherId = "voxta-ai"
+PublisherId = "voxta"
 DisplayName = "Voxta ComfyUI Nodes"
-Icon = ""
-Tags = []
+Icon = "https://www.voxta.ai/images/favicon_hu_c1ebff313d71a37c.png"
+Tags = ["voxta"]
 Repository = "https://github.com/voxta-ai/voxta"
 
 includes = []

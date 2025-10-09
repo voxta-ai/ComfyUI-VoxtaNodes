@@ -1,6 +1,7 @@
 import os
 import logging
 import re
+import random
 from .helpers import FolderHelper, IdFilenameBuilder
 
 try:  # pragma: no cover
@@ -25,7 +26,16 @@ class VoxtaFilterExistingCombinations:
                 "subfolder": ("STRING", {"default": "Avatars/Default", "multiline": False}),
                 "combination_ids": ("PROMPTCOMBINATORIDS",),
                 "prompts": ("STRING", {"forceInput": True}),
-                "do_not_render_if_already_exists": ("BOOLEAN", {"default": False}),
+                "behavior": (
+                    [
+                        "all",
+                        "new only",
+                        "single (first)",
+                        "single (last)",
+                        "single (random)",
+                    ],
+                    {"default": "all"},
+                ),
             },
         }
 
@@ -43,15 +53,13 @@ class VoxtaFilterExistingCombinations:
         prompts: list[str],
         output_path: list[str] | str,
         subfolder: list[str] | str,
-        do_not_render_if_already_exists: list[bool],
+        behavior: list[str] | str,
     ):
-        bypass = not (do_not_render_if_already_exists[0] if do_not_render_if_already_exists else True)
-        if bypass:
-            summary = f"Kept all {len(combination_ids)} combinations (bypass)"
-            return {
-                "result": (combination_ids, prompts),
-                "ui": {"summary": [summary], "skipped": [0], "kept": [len(combination_ids)]},
-            }
+        # Normalize behavior (ComfyUI often wraps scalars in lists)
+        if isinstance(behavior, list):
+            behavior_value = behavior[0] if behavior else "all"
+        else:
+            behavior_value = behavior or "all"
 
         save_dir = FolderHelper.get_output_directory(output_path, subfolder)
         print("[Voxta] Filtering existing combinations in:", save_dir)
@@ -90,29 +98,56 @@ class VoxtaFilterExistingCombinations:
                 return base, None  # out-of-range ignored for filtering purposes
             return base, val
 
-        kept_cids: list[list[str]] = []
-        kept_prompts: list[str] = []
-        skipped = 0
-
-        for cid, prompt in zip(combination_ids, prompts):
+        exists_flags: list[bool] = []
+        stems: list[str] = []
+        indices: list[int | None] = []
+        for cid in combination_ids:
             full_stem = IdFilenameBuilder.sanitize_id_filename(cid)
             base_stem, base_idx = split_trailing_number(full_stem)
+            stems.append(base_stem if base_idx is not None else full_stem)
+            indices.append(base_idx)
             if base_idx is not None:
                 existing = stem_indices.get(base_stem, set())
-                if base_idx in existing:
-                    skipped += 1
-                    continue
+                exists_flags.append(base_idx in existing)
             else:
-                if stem_indices.get(full_stem):
-                    skipped += 1
-                    continue
-            kept_cids.append(cid)
-            kept_prompts.append(prompt)
+                exists_flags.append(bool(stem_indices.get(full_stem)))
 
-        if not kept_cids:
-            raise ValueError("All combinations were filtered out, nothing to generate.")
+        total = len(combination_ids)
 
-        summary = f"Kept {len(kept_cids)} of {len(combination_ids)} combinations."
+        # Behavior handling
+        if behavior_value == "all":
+            kept_cids = combination_ids
+            kept_prompts = prompts
+            skipped = 0
+            summary = f"Kept all {total} combinations (all)."
+        else:
+            # Determine new (non-existing) combos
+            new_indices = [i for i, exists in enumerate(exists_flags) if not exists]
+            if behavior_value == "new only":
+                if not new_indices:
+                    raise ValueError("All combinations were filtered out, nothing to generate.")
+                kept_cids = [combination_ids[i] for i in new_indices]
+                kept_prompts = [prompts[i] for i in new_indices]
+                skipped = total - len(new_indices)
+                summary = f"Kept {len(kept_cids)} of {total} combinations."
+            elif behavior_value.startswith("single"):
+                candidate_indices = new_indices if new_indices else list(range(total))
+                if behavior_value == "single (first)":
+                    pick_index = candidate_indices[0]
+                elif behavior_value == "single (last)":
+                    pick_index = candidate_indices[-1]
+                elif behavior_value == "single (random)":
+                    pick_index = random.choice(candidate_indices)
+                else:
+                    raise ValueError(f"Unsupported behavior: {behavior_value}")
+                kept_cids = [combination_ids[pick_index]]
+                kept_prompts = [prompts[pick_index]]
+                skipped = total - 1
+                source = "new" if pick_index in new_indices else "existing"
+                summary = f"Selected 1 combination ({behavior_value}, {source})."
+            else:
+                raise ValueError(f"Unsupported behavior: {behavior_value}")
+
         return {
             "result": (kept_cids, kept_prompts),
             "ui": {"summary": [summary], "skipped": [skipped], "kept": [len(kept_cids)]},

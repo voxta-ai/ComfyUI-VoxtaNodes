@@ -2168,11 +2168,11 @@
                     "link": 211
                 },
                 {
-                    "localized_name": "do_not_render_if_already_exists",
-                    "name": "do_not_render_if_already_exists",
-                    "type": "BOOLEAN",
+                    "localized_name": "behavior",
+                    "name": "behavior",
+                    "type": "STRING",
                     "widget": {
-                        "name": "do_not_render_if_already_exists"
+                        "name": "behavior"
                     },
                     "link": null
                 }
@@ -2205,7 +2205,7 @@
             "widgets_values": [
                 "",
                 "Avatars/Default",
-                false
+                "all"
             ]
         },
         {

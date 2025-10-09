@@ -1,4 +1,5 @@
 import pytest
+import random
 from voxta.voxta_filter_existing import VoxtaFilterExistingCombinations
 
 
@@ -20,7 +21,7 @@ def test_filter_keeps_when_no_enumerated_exists(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     assert res["ui"]["skipped"][0] == 0
     assert res["ui"]["kept"][0] == 2
@@ -44,7 +45,7 @@ def test_filter_skips_when_index_01_exists(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -68,7 +69,7 @@ def test_filter_skips_when_other_index_exists(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -99,7 +100,7 @@ def test_filter_multiple_mixed(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     # Two stems skipped, two kept
     assert res["ui"]["skipped"][0] == 2
@@ -124,7 +125,7 @@ def test_filter_prompts_filtered_with_combinations(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -147,7 +148,7 @@ def test_filter_prompts_broadcast_mode(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     assert res["ui"]["kept"][0] == 2
     assert res["result"][1] == ["shared prompt", "shared prompt"]
@@ -166,7 +167,7 @@ def test_filter_prompts_true_length_mismatch_raises(tmp_path):
             prompts=prompts,
             output_path=[str(root)],
             subfolder=[sub],
-            do_not_render_if_already_exists=[True],
+            behavior=["new only"],
         )
 
 
@@ -185,7 +186,7 @@ def test_filter_handles_list_wrapped_path(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[True],
+        behavior=["new only"],
     )
     assert res["ui"]["skipped"][0] == 1
     assert res["ui"]["kept"][0] == 1
@@ -193,7 +194,7 @@ def test_filter_handles_list_wrapped_path(tmp_path):
     assert res["result"][1] == ["p2"]
 
 
-def test_filter_bypass_mode(tmp_path):
+def test_behavior_all_mode(tmp_path):
     node = VoxtaFilterExistingCombinations()
     root = tmp_path / "root"
     sub = "chars"
@@ -209,12 +210,12 @@ def test_filter_bypass_mode(tmp_path):
         prompts=prompts,
         output_path=[str(root)],
         subfolder=[sub],
-        do_not_render_if_already_exists=[False],  # bypass filtering
+        behavior=["all"],
     )
     assert res["result"][0] == combos
     assert res["result"][1] == ["p1", "p2"]
     assert res["ui"]["skipped"][0] == 0
-    assert res["ui"]["summary"][0].endswith("(bypass)")
+    assert res["ui"]["summary"][0].startswith("Kept all")
 
 
 def test_filter_all_skipped_raises(tmp_path):
@@ -233,5 +234,110 @@ def test_filter_all_skipped_raises(tmp_path):
             prompts=prompts,
             output_path=[str(root)],
             subfolder=[sub],
-            do_not_render_if_already_exists=[True],
+            behavior=["new only"],
         )
+
+
+def test_single_first_prefers_new(tmp_path):
+    node = VoxtaFilterExistingCombinations()
+    root = tmp_path / "root"
+    sub = "chars"
+    save_dir = root / sub
+    save_dir.mkdir(parents=True)
+    # existing for first combo so new first should be second
+    (save_dir / "A_B_01.png").write_bytes(b"X")
+    combos = [["A", "B"], ["C", "D"], ["E", "F"]]
+    prompts = ["p1", "p2", "p3"]
+    res = node.execute(
+        combination_ids=combos,
+        prompts=prompts,
+        output_path=[str(root)],
+        subfolder=[sub],
+        behavior=["single (first)"],
+    )
+    # Should pick first new -> index 1
+    assert res["result"][0] == [combos[1]]
+    assert res["result"][1] == ["p2"]
+    assert res["ui"]["kept"][0] == 1
+    assert res["ui"]["skipped"][0] == 2
+
+
+def test_single_last_prefers_new(tmp_path):
+    node = VoxtaFilterExistingCombinations()
+    root = tmp_path / "root"
+    sub = "chars"
+    save_dir = root / sub
+    save_dir.mkdir(parents=True)
+    # existing for last combo so last new should be middle
+    (save_dir / "E_F_01.png").write_bytes(b"X")
+    combos = [["A", "B"], ["C", "D"], ["E", "F"]]
+    prompts = ["p1", "p2", "p3"]
+    res = node.execute(
+        combination_ids=combos,
+        prompts=prompts,
+        output_path=[str(root)],
+        subfolder=[sub],
+        behavior=["single (last)"],
+    )
+    # New combos indices: 0,1 ; last new is 1
+    assert res["result"][0] == [combos[1]]
+    assert res["result"][1] == ["p2"]
+
+
+def test_single_random_prefers_new(tmp_path, monkeypatch):
+    node = VoxtaFilterExistingCombinations()
+    root = tmp_path / "root"
+    sub = "chars"
+    save_dir = root / sub
+    save_dir.mkdir(parents=True)
+    (save_dir / "A_B_01.png").write_bytes(b"X")
+    combos = [["A", "B"], ["C", "D"], ["E", "F"]]
+    prompts = ["p1", "p2", "p3"]
+
+    # new indices would be 1,2 -> force choose index 2
+    def fake_choice(seq):
+        return seq[-1]
+
+    monkeypatch.setattr(random, "choice", fake_choice)
+
+    res = node.execute(
+        combination_ids=combos,
+        prompts=prompts,
+        output_path=[str(root)],
+        subfolder=[sub],
+        behavior=["single (random)"],
+    )
+    assert res["result"][0] == [combos[2]]
+    assert res["result"][1] == ["p3"]
+
+
+def test_single_when_no_new_uses_existing(tmp_path):
+    node = VoxtaFilterExistingCombinations()
+    root = tmp_path / "root"
+    sub = "chars"
+    save_dir = root / sub
+    save_dir.mkdir(parents=True)
+    # make all existing
+    (save_dir / "A_B_01.png").write_bytes(b"X")
+    (save_dir / "C_D_01.png").write_bytes(b"X")
+    combos = [["A", "B"], ["C", "D"]]
+    prompts = ["p1", "p2"]
+
+    # single (first) should fallback to first existing
+    res = node.execute(
+        combination_ids=combos,
+        prompts=prompts,
+        output_path=[str(root)],
+        subfolder=[sub],
+        behavior=["single (first)"],
+    )
+    assert res["result"][0] == [combos[0]]
+    # single (last)
+    res2 = node.execute(
+        combination_ids=combos,
+        prompts=prompts,
+        output_path=[str(root)],
+        subfolder=[sub],
+        behavior=["single (last)"],
+    )
+    assert res2["result"][0] == [combos[-1]]
