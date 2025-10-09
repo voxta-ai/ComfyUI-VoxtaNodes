@@ -1,7 +1,7 @@
 {
     "id": "00dab147-56a7-4cf6-b1c1-2a377a578162",
     "revision": 0,
-    "last_node_id": 91,
+    "last_node_id": 92,
     "last_link_id": 230,
     "nodes": [
         {
@@ -18,7 +18,7 @@
             "flags": {
                 "pinned": true
             },
-            "order": 11,
+            "order": 12,
             "mode": 0,
             "inputs": [
                 {
@@ -177,7 +177,7 @@
             "flags": {
                 "pinned": true
             },
-            "order": 16,
+            "order": 17,
             "mode": 0,
             "inputs": [
                 {
@@ -363,7 +363,7 @@
                 "collapsed": false,
                 "pinned": true
             },
-            "order": 18,
+            "order": 19,
             "mode": 0,
             "inputs": [
                 {
@@ -449,7 +449,7 @@
                 "collapsed": true,
                 "pinned": true
             },
-            "order": 17,
+            "order": 18,
             "mode": 0,
             "inputs": [
                 {
@@ -621,7 +621,7 @@
                 "collapsed": true,
                 "pinned": true
             },
-            "order": 15,
+            "order": 16,
             "mode": 0,
             "inputs": [
                 {
@@ -673,7 +673,7 @@
             "flags": {
                 "pinned": true
             },
-            "order": 12,
+            "order": 13,
             "mode": 0,
             "inputs": [
                 {
@@ -761,7 +761,7 @@
                 "collapsed": true,
                 "pinned": true
             },
-            "order": 13,
+            "order": 14,
             "mode": 0,
             "inputs": [
                 {
@@ -979,7 +979,7 @@
             "flags": {
                 "pinned": true
             },
-            "order": 14,
+            "order": 15,
             "mode": 0,
             "inputs": [
                 {
@@ -1095,16 +1095,14 @@
             "type": "VoxtaExportCharacter",
             "pos": [
                 480,
-                -300
+                200
             ],
             "size": [
                 750,
-                350
+                170
             ],
-            "flags": {
-                "pinned": true
-            },
-            "order": 19,
+            "flags": {},
+            "order": 20,
             "mode": 0,
             "inputs": [
                 {
@@ -1181,6 +1179,66 @@
                 "Avatars/Default",
                 ".webp lossy 80",
                 "append"
+            ]
+        },
+        {
+            "id": 92,
+            "type": "VoxtaOutputFolder",
+            "pos": [
+                480,
+                -310
+            ],
+            "size": [
+                750,
+                460
+            ],
+            "flags": {},
+            "order": 11,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "output_path",
+                    "name": "output_path",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "output_path"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "subfolder",
+                    "name": "subfolder",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "subfolder"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "output_path",
+                    "name": "output_path",
+                    "type": "STRING",
+                    "links": []
+                },
+                {
+                    "localized_name": "subfolder",
+                    "name": "subfolder",
+                    "type": "STRING",
+                    "links": []
+                }
+            ],
+            "title": "Voxta: Output Folder (Select a character path)",
+            "properties": {
+                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
+                "ver": "1d7b19994413e8be27e7d22ccc12e4df99109625",
+                "Node name for S&R": "VoxtaOutputFolder"
+            },
+            "widgets_values": [
+                "",
+                "Avatars/Default",
+                null
             ]
         }
     ],
@@ -1441,10 +1499,10 @@
     "config": {},
     "extra": {
         "ds": {
-            "scale": 1,
+            "scale": 0.8264462809917354,
             "offset": [
-                342.595661622036,
-                406.92944164954815
+                753.3471372772012,
+                365.965605935878
             ]
         },
         "frontendVersion": "1.17.11",

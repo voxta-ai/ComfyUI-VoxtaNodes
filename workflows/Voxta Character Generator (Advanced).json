@@ -1921,161 +1921,6 @@
             "bgcolor": "#653"
         },
         {
-            "id": 77,
-            "type": "VoxtaExportCharacter",
-            "pos": [
-                480,
-                20
-            ],
-            "size": [
-                750,
-                350
-            ],
-            "flags": {},
-            "order": 37,
-            "mode": 0,
-            "inputs": [
-                {
-                    "localized_name": "images",
-                    "name": "images",
-                    "type": "IMAGE",
-                    "link": 193
-                },
-                {
-                    "localized_name": "prompts",
-                    "name": "prompts",
-                    "type": "STRING",
-                    "link": 194
-                },
-                {
-                    "localized_name": "combination_ids",
-                    "name": "combination_ids",
-                    "type": "PROMPTCOMBINATORIDS",
-                    "link": 202
-                },
-                {
-                    "localized_name": "output_path",
-                    "name": "output_path",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "output_path"
-                    },
-                    "link": 210
-                },
-                {
-                    "localized_name": "subfolder",
-                    "name": "subfolder",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "subfolder"
-                    },
-                    "link": 212
-                },
-                {
-                    "localized_name": "output_format",
-                    "name": "output_format",
-                    "type": "COMBO",
-                    "widget": {
-                        "name": "output_format"
-                    },
-                    "link": null
-                },
-                {
-                    "localized_name": "on_exists",
-                    "name": "on_exists",
-                    "shape": 7,
-                    "type": "COMBO",
-                    "widget": {
-                        "name": "on_exists"
-                    },
-                    "link": null
-                }
-            ],
-            "outputs": [
-                {
-                    "localized_name": "IMAGE",
-                    "name": "IMAGE",
-                    "type": "IMAGE",
-                    "links": null
-                }
-            ],
-            "properties": {
-                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
-                "ver": "8df5b4c25019e2c3144bd805be70400809a2f25c",
-                "Node name for S&R": "VoxtaExportCharacter"
-            },
-            "widgets_values": [
-                "",
-                "",
-                ".webp lossy 80",
-                "append"
-            ]
-        },
-        {
-            "id": 89,
-            "type": "VoxtaOutputFolder",
-            "pos": [
-                480,
-                -310
-            ],
-            "size": [
-                750,
-                102
-            ],
-            "flags": {},
-            "order": 15,
-            "mode": 0,
-            "inputs": [
-                {
-                    "localized_name": "output_path",
-                    "name": "output_path",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "output_path"
-                    },
-                    "link": null
-                },
-                {
-                    "localized_name": "subfolder",
-                    "name": "subfolder",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "subfolder"
-                    },
-                    "link": null
-                }
-            ],
-            "outputs": [
-                {
-                    "localized_name": "output_path",
-                    "name": "output_path",
-                    "type": "STRING",
-                    "links": [
-                        209,
-                        210
-                    ]
-                },
-                {
-                    "localized_name": "subfolder",
-                    "name": "subfolder",
-                    "type": "STRING",
-                    "links": [
-                        211,
-                        212
-                    ]
-                }
-            ],
-            "properties": {
-                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
-                "ver": "1d7b19994413e8be27e7d22ccc12e4df99109625",
-                "Node name for S&R": "VoxtaOutputFolder"
-            },
-            "widgets_values": [
-                "",
-                "Avatars/Default"
-            ]
-        },
-        {
             "id": 65,
             "type": "JjkText",
             "pos": [
@@ -2120,92 +1965,6 @@
             },
             "widgets_values": [
                 "Neutral@simple smile\nLove@heart-shaped pupils, loving\nUnhappy@pouting, unhappy\nSmile@big smile, happy\nLaugh@laugh\nCry@sad, pouting\nFear@afraid, worried\nAngry@angry, anger mark\nHorny@horny, hearts, blushing\nQuestion@confused, question marks, raised eyebrow\nSurprise@surprised, exclamation mark"
-            ]
-        },
-        {
-            "id": 88,
-            "type": "VoxtaFilterExistingCombinations",
-            "pos": [
-                480,
-                -170
-            ],
-            "size": [
-                750,
-                150
-            ],
-            "flags": {},
-            "order": 26,
-            "mode": 0,
-            "inputs": [
-                {
-                    "localized_name": "combination_ids",
-                    "name": "combination_ids",
-                    "type": "PROMPTCOMBINATORIDS",
-                    "link": 201
-                },
-                {
-                    "localized_name": "prompts",
-                    "name": "prompts",
-                    "type": "STRING",
-                    "link": 203
-                },
-                {
-                    "localized_name": "output_path",
-                    "name": "output_path",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "output_path"
-                    },
-                    "link": 209
-                },
-                {
-                    "localized_name": "subfolder",
-                    "name": "subfolder",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "subfolder"
-                    },
-                    "link": 211
-                },
-                {
-                    "localized_name": "behavior",
-                    "name": "behavior",
-                    "type": "STRING",
-                    "widget": {
-                        "name": "behavior"
-                    },
-                    "link": null
-                }
-            ],
-            "outputs": [
-                {
-                    "localized_name": "combination_ids",
-                    "name": "combination_ids",
-                    "shape": 6,
-                    "type": "PROMPTCOMBINATORIDS",
-                    "links": [
-                        202
-                    ]
-                },
-                {
-                    "localized_name": "prompts",
-                    "name": "prompts",
-                    "shape": 6,
-                    "type": "STRING",
-                    "links": [
-                        204
-                    ]
-                }
-            ],
-            "properties": {
-                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
-                "ver": "267c149d094f169840434d74a1e4fcce067d4f84",
-                "Node name for S&R": "VoxtaFilterExistingCombinations"
-            },
-            "widgets_values": [
-                "",
-                "Avatars/Default",
-                "all"
             ]
         },
         {
@@ -2442,6 +2201,248 @@
             },
             "widgets_values": [
                 "(text, words, speech:1.2), deformed, mutated, disfigured, long body, lowres, bad anatomy, bad hands, missing fingers, extra digits, fewer digits, very displeasing, (worst quality, bad quality:0.8), bad anatomy, sketch, jpeg artifacts, signature, watermark, username, conjoined, bad ai-generated,"
+            ]
+        },
+        {
+            "id": 77,
+            "type": "VoxtaExportCharacter",
+            "pos": [
+                480,
+                200
+            ],
+            "size": [
+                750,
+                170
+            ],
+            "flags": {},
+            "order": 37,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "images",
+                    "name": "images",
+                    "type": "IMAGE",
+                    "link": 193
+                },
+                {
+                    "localized_name": "prompts",
+                    "name": "prompts",
+                    "type": "STRING",
+                    "link": 194
+                },
+                {
+                    "localized_name": "combination_ids",
+                    "name": "combination_ids",
+                    "type": "PROMPTCOMBINATORIDS",
+                    "link": 202
+                },
+                {
+                    "localized_name": "output_path",
+                    "name": "output_path",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "output_path"
+                    },
+                    "link": 210
+                },
+                {
+                    "localized_name": "subfolder",
+                    "name": "subfolder",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "subfolder"
+                    },
+                    "link": 212
+                },
+                {
+                    "localized_name": "output_format",
+                    "name": "output_format",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "output_format"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "on_exists",
+                    "name": "on_exists",
+                    "shape": 7,
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "on_exists"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "IMAGE",
+                    "name": "IMAGE",
+                    "type": "IMAGE",
+                    "links": null
+                }
+            ],
+            "properties": {
+                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
+                "ver": "8df5b4c25019e2c3144bd805be70400809a2f25c",
+                "Node name for S&R": "VoxtaExportCharacter"
+            },
+            "widgets_values": [
+                "",
+                "",
+                ".webp lossy 80",
+                "append"
+            ]
+        },
+        {
+            "id": 88,
+            "type": "VoxtaFilterExistingCombinations",
+            "pos": [
+                480,
+                0
+            ],
+            "size": [
+                750,
+                150
+            ],
+            "flags": {},
+            "order": 26,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "combination_ids",
+                    "name": "combination_ids",
+                    "type": "PROMPTCOMBINATORIDS",
+                    "link": 201
+                },
+                {
+                    "localized_name": "prompts",
+                    "name": "prompts",
+                    "type": "STRING",
+                    "link": 203
+                },
+                {
+                    "localized_name": "output_path",
+                    "name": "output_path",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "output_path"
+                    },
+                    "link": 209
+                },
+                {
+                    "localized_name": "subfolder",
+                    "name": "subfolder",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "subfolder"
+                    },
+                    "link": 211
+                },
+                {
+                    "localized_name": "behavior",
+                    "name": "behavior",
+                    "type": "COMBO",
+                    "widget": {
+                        "name": "behavior"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "combination_ids",
+                    "name": "combination_ids",
+                    "shape": 6,
+                    "type": "PROMPTCOMBINATORIDS",
+                    "links": [
+                        202
+                    ]
+                },
+                {
+                    "localized_name": "prompts",
+                    "name": "prompts",
+                    "shape": 6,
+                    "type": "STRING",
+                    "links": [
+                        204
+                    ]
+                }
+            ],
+            "properties": {
+                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
+                "ver": "267c149d094f169840434d74a1e4fcce067d4f84",
+                "Node name for S&R": "VoxtaFilterExistingCombinations"
+            },
+            "widgets_values": [
+                "",
+                "Avatars/Default",
+                "all"
+            ]
+        },
+        {
+            "id": 89,
+            "type": "VoxtaOutputFolder",
+            "pos": [
+                480,
+                -310
+            ],
+            "size": [
+                750,
+                260
+            ],
+            "flags": {},
+            "order": 15,
+            "mode": 0,
+            "inputs": [
+                {
+                    "localized_name": "output_path",
+                    "name": "output_path",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "output_path"
+                    },
+                    "link": null
+                },
+                {
+                    "localized_name": "subfolder",
+                    "name": "subfolder",
+                    "type": "STRING",
+                    "widget": {
+                        "name": "subfolder"
+                    },
+                    "link": null
+                }
+            ],
+            "outputs": [
+                {
+                    "localized_name": "output_path",
+                    "name": "output_path",
+                    "type": "STRING",
+                    "links": [
+                        209,
+                        210
+                    ]
+                },
+                {
+                    "localized_name": "subfolder",
+                    "name": "subfolder",
+                    "type": "STRING",
+                    "links": [
+                        211,
+                        212
+                    ]
+                }
+            ],
+            "properties": {
+                "aux_id": "voxta-ai/ComfyUI-VoxtaNodes",
+                "ver": "1d7b19994413e8be27e7d22ccc12e4df99109625",
+                "Node name for S&R": "VoxtaOutputFolder"
+            },
+            "widgets_values": [
+                "",
+                "Avatars/Default",
+                null
             ]
         }
     ],
@@ -2961,10 +2962,10 @@
     "config": {},
     "extra": {
         "ds": {
-            "scale": 1.2100000000000002,
+            "scale": 2.3579476910000023,
             "offset": [
-                1977.459255508231,
-                271.1368814464661
+                -566.2691292607744,
+                109.92270425379576
             ]
         },
         "frontendVersion": "1.17.11",
